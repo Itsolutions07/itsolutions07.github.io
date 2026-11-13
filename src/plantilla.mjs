@@ -25,6 +25,10 @@ export function render(d) {
     if (p.tipo_imagen === 'palabras') {
       return `<figure class="scene__art scene__art--words" aria-label="Ejemplos">${(p.palabras || []).map((w) => `<span>${esc(w)}</span>`).join('')}</figure>`;
     }
+    if (p.tipo_imagen === 'computadora_y_celular') {
+      const [pc, cel] = p.imagenes || [];
+      return `<figure class="scene__art scene__art--duo"><div class="frame"><img loading="lazy" src="${esc(pc || '')}" alt="${esc(p.nombre)} en computadora" width="1440" height="900"></div>${cel ? `<div class="phone phone--mini"><div class="phone__screen"><img loading="lazy" class="scrolly" src="${esc(cel)}" alt="${esc(p.nombre)} en el celular" width="480" height="1440"></div></div>` : ''}</figure>`;
+    }
     if (p.tipo_imagen === 'celulares' || p.tipo_imagen === 'celulares_fijos') {
       const scroll = p.tipo_imagen === 'celulares';
       return `<figure class="scene__art scene__art--phones">${(p.imagenes || []).slice(0, 2).map((src) => phone(src, `${p.nombre} en el celular`, scroll)).join('')}</figure>`;

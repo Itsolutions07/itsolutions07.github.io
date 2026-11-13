@@ -22,79 +22,132 @@
     "boton_secundario": "Ver los productos",
     "texto_debajo": "su sistema y su catálogo"
   },
-  "cinta": ["Baleadas", "Ropa", "Repuestos", "Medicinas", "Pan dulce", "Uñas", "Celulares", "Ferretería", "Salones", "Boutiques"],
+  "cinta": [
+    "Baleadas",
+    "Ropa",
+    "Repuestos",
+    "Medicinas",
+    "Pan dulce",
+    "Uñas",
+    "Celulares",
+    "Ferretería",
+    "Salones",
+    "Boutiques"
+  ],
   "productos": [
     {
       "nombre": "Facturación",
       "frase": "Cobre rápido y *con factura legal.*",
-      "puntos": ["Facturas con CAI e ISV calculado solo", "Escáner de código de barras", "Cotizaciones, combos y devoluciones"],
+      "puntos": [
+        "Facturas con CAI e ISV calculado solo",
+        "Escáner de código de barras",
+        "Cotizaciones, combos y devoluciones"
+      ],
       "boton": "Lo quiero en mi negocio",
       "mensaje_whatsapp": "Hola, me interesa DRC System - Facturación",
       "color_fondo": "#0B2A8F",
       "color_acento": "#9DB4FF",
       "tipo_imagen": "computadora",
-      "imagenes": ["/assets/img/giros/repuestos-venta.webp"],
+      "imagenes": [
+        "/assets/img/giros/repuestos-venta.webp"
+      ],
       "palabras": []
     },
     {
       "nombre": "Inventario",
       "frase": "Sepa qué tiene *sin contar a mano.*",
-      "puntos": ["Existencias al día con cada venta", "Alertas cuando algo se está acabando", "Entradas, ajustes y costos"],
+      "puntos": [
+        "Existencias al día con cada venta",
+        "Alertas cuando algo se está acabando",
+        "Entradas, ajustes y costos"
+      ],
       "boton": "Lo quiero en mi negocio",
       "mensaje_whatsapp": "Hola, me interesa DRC System - Inventario",
       "color_fondo": "#0C4448",
       "color_acento": "#7FE3D8",
       "tipo_imagen": "computadora",
-      "imagenes": ["/assets/img/giros/ferreteria-inv.webp"],
+      "imagenes": [
+        "/assets/img/giros/ferreteria-inv.webp"
+      ],
       "palabras": []
     },
     {
       "nombre": "Contabilidad",
       "frase": "Sus números claros, *cada noche.*",
-      "puntos": ["Ventas por día, semana y mes", "Ingresos, gastos y ganancias", "Reportes listos para Excel"],
+      "puntos": [
+        "Ventas por día, semana y mes",
+        "Ingresos, gastos y ganancias",
+        "Reportes listos para Excel"
+      ],
       "boton": "Lo quiero en mi negocio",
       "mensaje_whatsapp": "Hola, me interesa DRC System - Contabilidad",
       "color_fondo": "#0D3529",
       "color_acento": "#8BE3B4",
       "tipo_imagen": "computadora",
-      "imagenes": ["/assets/img/sys/dashboard.webp"],
+      "imagenes": [
+        "/assets/img/sys/dashboard.webp"
+      ],
       "palabras": []
     },
     {
       "nombre": "Catálogo web",
       "frase": "Su tienda en *un solo enlace.*",
-      "puntos": ["Con su logo, sus colores y sus categorías", "Los pedidos le llegan por WhatsApp", "Se comparte en redes con un toque"],
+      "puntos": [
+        "Con su logo, sus colores y sus categorías",
+        "Los pedidos le llegan por WhatsApp",
+        "Se comparte en redes con un toque"
+      ],
       "boton": "Lo quiero en mi negocio",
       "mensaje_whatsapp": "Hola, me interesa DRC System - Catálogo web",
       "color_fondo": "#17120A",
       "color_acento": "#E2B85C",
-      "tipo_imagen": "celulares",
-      "imagenes": ["/assets/img/giros/ropa-cat.webp", "/assets/img/giros/pan-cat.webp"],
+      "tipo_imagen": "computadora_y_celular",
+      "imagenes": [
+        "/assets/img/casos/leonor-pc.webp",
+        "/assets/img/casos/leonor-cat.webp"
+      ],
       "palabras": []
     },
     {
       "nombre": "App para salón",
       "frase": "Su salón, *en la palma de su mano.*",
-      "puntos": ["Citas del día y agenda", "Cuentas abiertas y recibos", "Recordatorios por WhatsApp"],
+      "puntos": [
+        "Citas del día y agenda",
+        "Cuentas abiertas y recibos",
+        "Recordatorios por WhatsApp"
+      ],
       "boton": "Lo quiero en mi negocio",
       "mensaje_whatsapp": "Hola, me interesa la app para salón",
       "color_fondo": "#4A1730",
       "color_acento": "#FFB3CF",
       "tipo_imagen": "celulares_fijos",
-      "imagenes": ["/assets/img/casos/zutils-02.webp", "/assets/img/casos/zutils-05.webp"],
+      "imagenes": [
+        "/assets/img/casos/zutils-02.webp",
+        "/assets/img/casos/zutils-05.webp"
+      ],
       "palabras": []
     },
     {
       "nombre": "A la medida",
       "frase": "Si su negocio necesita su propia app, *se la hacemos.*",
-      "puntos": ["Talleres, clínicas, gimnasios, restaurantes", "Con su marca, en su celular o computadora", "Respaldos y permisos por usuario"],
+      "puntos": [
+        "Talleres, clínicas, gimnasios, restaurantes",
+        "Con su marca, en su celular o computadora",
+        "Respaldos y permisos por usuario"
+      ],
       "boton": "Cuénteme su idea",
       "mensaje_whatsapp": "Hola, quiero una app a la medida para mi negocio",
       "color_fondo": "#2E1C0E",
       "color_acento": "#FFB27A",
       "tipo_imagen": "palabras",
       "imagenes": [],
-      "palabras": ["¿Taller?", "¿Clínica?", "¿Gimnasio?", "¿Restaurante?", "¿Delivery?"]
+      "palabras": [
+        "¿Taller?",
+        "¿Clínica?",
+        "¿Gimnasio?",
+        "¿Restaurante?",
+        "¿Delivery?"
+      ]
     }
   ],
   "pruebe": {
@@ -103,40 +156,147 @@
     "boton": "Enviar este mensaje"
   },
   "giros": [
-    { "boton": "Baleadas", "palabra": "baleadas", "negocio": "Baleadas Doña Mary", "frase": "una baleadería", "img_venta": "/assets/img/giros/baleadas-venta.webp", "img_inventario": "/assets/img/giros/baleadas-inv.webp", "img_catalogo": "/assets/img/giros/baleadas-cat.webp" },
-    { "boton": "Ropa", "palabra": "ropa", "negocio": "Moda Bella SPS", "frase": "una tienda de ropa", "img_venta": "/assets/img/giros/ropa-venta.webp", "img_inventario": "/assets/img/giros/ropa-inv.webp", "img_catalogo": "/assets/img/giros/ropa-cat.webp" },
-    { "boton": "Repuestos", "palabra": "repuestos", "negocio": "Repuestos El Toro", "frase": "una tienda de repuestos", "img_venta": "/assets/img/giros/repuestos-venta.webp", "img_inventario": "/assets/img/giros/repuestos-inv.webp", "img_catalogo": "/assets/img/giros/repuestos-cat.webp" },
-    { "boton": "Farmacia", "palabra": "medicinas", "negocio": "Farmacia San Rafael", "frase": "una farmacia", "img_venta": "/assets/img/giros/farmacia-venta.webp", "img_inventario": "/assets/img/giros/farmacia-inv.webp", "img_catalogo": "/assets/img/giros/farmacia-cat.webp" },
-    { "boton": "Pan dulce", "palabra": "pan dulce", "negocio": "Panadería La Espiga", "frase": "una panadería", "img_venta": "/assets/img/giros/pan-venta.webp", "img_inventario": "/assets/img/giros/pan-inv.webp", "img_catalogo": "/assets/img/giros/pan-cat.webp" },
-    { "boton": "Uñas", "palabra": "uñas", "negocio": "Nails & Beauty", "frase": "un negocio de uñas", "img_venta": "/assets/img/giros/unas-venta.webp", "img_inventario": "/assets/img/giros/unas-inv.webp", "img_catalogo": "/assets/img/giros/unas-cat.webp" },
-    { "boton": "Celulares", "palabra": "celulares", "negocio": "Celulares Express", "frase": "una tienda de celulares", "img_venta": "/assets/img/giros/celulares-venta.webp", "img_inventario": "/assets/img/giros/celulares-inv.webp", "img_catalogo": "/assets/img/giros/celulares-cat.webp" },
-    { "boton": "Ferretería", "palabra": "herramientas", "negocio": "Ferretería El Martillo", "frase": "una ferretería", "img_venta": "/assets/img/giros/ferreteria-venta.webp", "img_inventario": "/assets/img/giros/ferreteria-inv.webp", "img_catalogo": "/assets/img/giros/ferreteria-cat.webp" }
+    {
+      "boton": "Baleadas",
+      "palabra": "baleadas",
+      "negocio": "Baleadas Doña Mary",
+      "frase": "una baleadería",
+      "img_venta": "/assets/img/giros/baleadas-venta.webp",
+      "img_inventario": "/assets/img/giros/baleadas-inv.webp",
+      "img_catalogo": "/assets/img/giros/baleadas-cat.webp"
+    },
+    {
+      "boton": "Ropa",
+      "palabra": "ropa",
+      "negocio": "Moda Bella SPS",
+      "frase": "una tienda de ropa",
+      "img_venta": "/assets/img/giros/ropa-venta.webp",
+      "img_inventario": "/assets/img/giros/ropa-inv.webp",
+      "img_catalogo": "/assets/img/giros/ropa-cat.webp"
+    },
+    {
+      "boton": "Repuestos",
+      "palabra": "repuestos",
+      "negocio": "Repuestos El Toro",
+      "frase": "una tienda de repuestos",
+      "img_venta": "/assets/img/giros/repuestos-venta.webp",
+      "img_inventario": "/assets/img/giros/repuestos-inv.webp",
+      "img_catalogo": "/assets/img/giros/repuestos-cat.webp"
+    },
+    {
+      "boton": "Farmacia",
+      "palabra": "medicinas",
+      "negocio": "Farmacia San Rafael",
+      "frase": "una farmacia",
+      "img_venta": "/assets/img/giros/farmacia-venta.webp",
+      "img_inventario": "/assets/img/giros/farmacia-inv.webp",
+      "img_catalogo": "/assets/img/giros/farmacia-cat.webp"
+    },
+    {
+      "boton": "Pan dulce",
+      "palabra": "pan dulce",
+      "negocio": "Panadería La Espiga",
+      "frase": "una panadería",
+      "img_venta": "/assets/img/giros/pan-venta.webp",
+      "img_inventario": "/assets/img/giros/pan-inv.webp",
+      "img_catalogo": "/assets/img/giros/pan-cat.webp"
+    },
+    {
+      "boton": "Uñas",
+      "palabra": "uñas",
+      "negocio": "Nails & Beauty",
+      "frase": "un negocio de uñas",
+      "img_venta": "/assets/img/giros/unas-venta.webp",
+      "img_inventario": "/assets/img/giros/unas-inv.webp",
+      "img_catalogo": "/assets/img/giros/unas-cat.webp"
+    },
+    {
+      "boton": "Celulares",
+      "palabra": "celulares",
+      "negocio": "Celulares Express",
+      "frase": "una tienda de celulares",
+      "img_venta": "/assets/img/giros/celulares-venta.webp",
+      "img_inventario": "/assets/img/giros/celulares-inv.webp",
+      "img_catalogo": "/assets/img/giros/celulares-cat.webp"
+    },
+    {
+      "boton": "Ferretería",
+      "palabra": "herramientas",
+      "negocio": "Ferretería El Martillo",
+      "frase": "una ferretería",
+      "img_venta": "/assets/img/giros/ferreteria-venta.webp",
+      "img_inventario": "/assets/img/giros/ferreteria-inv.webp",
+      "img_catalogo": "/assets/img/giros/ferreteria-cat.webp"
+    }
   ],
   "antes_despues": {
     "titulo": "De mandar fotos una por una *a tener su tienda.*",
-    "imagenes_despues": ["/assets/img/giros/celulares-cat.webp", "/assets/img/giros/repuestos-cat.webp"]
+    "imagenes_despues": [
+      "/assets/img/casos/lovesita-cat.webp",
+      "/assets/img/casos/leonor-cat.webp"
+    ]
   },
   "mantenimiento": {
     "titulo": "Su computadora, *como nueva.*",
     "descripcion": "Además de los sistemas, le damos mantenimiento a su equipo.",
     "servicios": [
-      { "nombre": "Memoria RAM", "detalle": "Más memoria para que no se trabe." },
-      { "nombre": "Disco SSD", "detalle": "Enciende y abre programas en segundos." },
-      { "nombre": "Windows y Office", "detalle": "Instalación, activación y actualizaciones." },
-      { "nombre": "Limpieza y revisión", "detalle": "Polvo fuera, temperatura bajo control." }
+      {
+        "nombre": "Memoria RAM",
+        "detalle": "Más memoria para que no se trabe."
+      },
+      {
+        "nombre": "Disco SSD",
+        "detalle": "Enciende y abre programas en segundos."
+      },
+      {
+        "nombre": "Windows y Office",
+        "detalle": "Instalación, activación y actualizaciones."
+      },
+      {
+        "nombre": "Limpieza y revisión",
+        "detalle": "Polvo fuera, temperatura bajo control."
+      }
     ],
     "modalidades": [
-      { "nombre": "A distancia", "detalle": "Nos conectamos a su equipo desde donde esté.", "mensaje_whatsapp": "Hola, necesito soporte a distancia para mi computadora" },
-      { "nombre": "A domicilio", "detalle": "Vamos a su casa o negocio.", "mensaje_whatsapp": "Hola, necesito servicio a domicilio para mi computadora" }
+      {
+        "nombre": "A distancia",
+        "detalle": "Nos conectamos a su equipo desde donde esté.",
+        "mensaje_whatsapp": "Hola, necesito soporte a distancia para mi computadora"
+      },
+      {
+        "nombre": "A domicilio",
+        "detalle": "Vamos a su casa o negocio.",
+        "mensaje_whatsapp": "Hola, necesito servicio a domicilio para mi computadora"
+      }
     ]
   },
   "clientes": {
     "titulo": "Negocios que ya *trabajan con DRC.*",
     "lista": [
-      { "nombre": "Leonor Boutique", "descripcion": "Accesorios · Sistema y catálogo web", "portada": "/assets/img/casos/Leonor_Boutique_v4.webp", "video": "/assets/video/Leonor_Boutique_v4.mp4" },
-      { "nombre": "Lovesita", "descripcion": "Tienda · Sistema y catálogo web", "portada": "/assets/img/casos/Lovesita_v4.webp", "video": "/assets/video/Lovesita_v4.mp4" },
-      { "nombre": "ZUTILS Salón", "descripcion": "Salón de belleza · App móvil", "portada": "/assets/img/casos/ZUTILS_Salon_v4.webp", "video": "/assets/video/ZUTILS_Salon_v4.mp4" },
-      { "nombre": "Su negocio", "descripcion": "DRC System para cualquier giro", "portada": "/assets/img/casos/Vendas_lo_que_vendas_v3.webp", "video": "/assets/video/Vendas_lo_que_vendas_v3.mp4" }
+      {
+        "nombre": "Leonor Boutique",
+        "descripcion": "Accesorios · Sistema y catálogo web",
+        "portada": "/assets/img/casos/Leonor_Boutique_v4.webp",
+        "video": "/assets/video/Leonor_Boutique_v4.mp4"
+      },
+      {
+        "nombre": "Lovesita",
+        "descripcion": "Tienda · Sistema y catálogo web",
+        "portada": "/assets/img/casos/Lovesita_v4.webp",
+        "video": "/assets/video/Lovesita_v4.mp4"
+      },
+      {
+        "nombre": "ZUTILS Salón",
+        "descripcion": "Salón de belleza · App móvil",
+        "portada": "/assets/img/casos/ZUTILS_Salon_v4.webp",
+        "video": "/assets/video/ZUTILS_Salon_v4.mp4"
+      },
+      {
+        "nombre": "Su negocio",
+        "descripcion": "DRC System para cualquier giro",
+        "portada": "/assets/img/casos/Vendas_lo_que_vendas_v3.webp",
+        "video": "/assets/video/Vendas_lo_que_vendas_v3.mp4"
+      }
     ]
   },
   "cierre": {

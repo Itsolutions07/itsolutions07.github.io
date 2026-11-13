@@ -40,4 +40,5 @@ mkdirSync(OUT, { recursive: true });
 writeFileSync(`${OUT}/index.html`, render(limpiar(datos)));
 for (const dir of ['css', 'js', 'assets']) cpSync(dir, `${OUT}/${dir}`, { recursive: true });
 writeFileSync(`${OUT}/.nojekyll`, '');
+cpSync('assets/img/favicon.ico', `${OUT}/favicon.ico`);
 console.log(`Página generada en ${OUT}/ (${datos.productos.length} productos, ${datos.giros.length} giros, ${datos.clientes.lista.length} clientes)`);

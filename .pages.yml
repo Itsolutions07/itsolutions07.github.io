@@ -76,6 +76,7 @@ content:
             options:
               values:
                 - { name: computadora, label: "Pantalla de computadora (1 imagen)" }
+                - { name: computadora_y_celular, label: "Computadora + celular (1.ª imagen computadora, 2.ª captura larga de celular)" }
                 - { name: celulares, label: "Dos celulares que se desplazan (catálogos largos)" }
                 - { name: celulares_fijos, label: "Dos celulares fijos (pantallas de app)" }
                 - { name: palabras, label: "Solo palabras grandes (sin imágenes)" }
