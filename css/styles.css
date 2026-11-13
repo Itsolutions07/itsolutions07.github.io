@@ -204,7 +204,7 @@ html { scrollbar-color: #2A3563 var(--night); }
 }
 .phone::before { content: ""; position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 30%; height: 16px; border-radius: 10px; background: #070B1F; z-index: 2; }
 .phone__screen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 27px; background: #fff; container-type: size; }
-.phone__screen img { width: 100%; }
+.phone__screen img { width: 100%; height: auto; }
 .phone__screen img.scrolly { animation: phoneScroll 16s var(--ease-io) infinite alternate; }
 @keyframes phoneScroll { 0%, 12% { transform: translateY(0); } 100% { transform: translateY(calc(-100% + 100cqh)); } }
 

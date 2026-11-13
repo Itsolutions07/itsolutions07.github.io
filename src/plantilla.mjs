@@ -72,7 +72,7 @@ export function render(d) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=${d.__ver}">
 </head>
 <body>
 
@@ -297,7 +297,7 @@ ${d.clientes.lista.map((c) => `    <figure class="case">
 </svg>
 
 <script>window.SITIO = ${JSON.stringify(datosJS).replace(/</g, '\\u003c')};</script>
-<script src="js/main.js" defer></script>
+<script src="js/main.js?v=${d.__ver}" defer></script>
 </body>
 </html>
 `;
