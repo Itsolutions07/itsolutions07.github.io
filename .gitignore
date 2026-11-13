@@ -1,0 +1,12 @@
+# Página generada (GitHub la crea sola)
+_site/
+
+# Herramientas locales de Claude (skills, configuración del navegador)
+.claude/
+.taste-skill/
+.impeccable/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

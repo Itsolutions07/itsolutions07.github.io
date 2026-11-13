@@ -1,0 +1,176 @@
+# Panel de administración (Pages CMS · https://app.pagescms.org)
+# Cada vez que se guarda, GitHub vuelve a generar y publicar la página sola.
+media:
+  input: assets
+  output: /assets
+
+content:
+  - name: sitio
+    label: Página principal
+    type: file
+    path: contenido/sitio.json
+    format: json
+    fields:
+      # ---------- General ----------
+      - name: general
+        label: General y Google
+        type: object
+        fields:
+          - { name: titulo_pestana, label: Título de la pestaña del navegador, type: string, required: true }
+          - { name: descripcion_google, label: Descripción para Google y al compartir, type: text, description: "Una o dos frases. Es lo que aparece debajo del título en Google." }
+          - { name: titulo_al_compartir, label: Título al compartir en WhatsApp / Facebook, type: string }
+          - { name: texto_pie, label: Texto del pie de página, type: string }
+          - { name: hecho_en, label: Segunda línea del pie, type: string }
+          - { name: anio, label: Año del copyright, type: string }
+
+      # ---------- Contacto ----------
+      - name: contacto
+        label: Contacto
+        type: object
+        fields:
+          - name: whatsapp
+            label: Número de WhatsApp (solo números, con 504)
+            type: string
+            required: true
+            pattern: "^[0-9]{8,15}$"
+            description: "Ejemplo: 50433180857. Todos los botones de la página usan este número."
+          - { name: whatsapp_visible, label: Número como se muestra, type: string, description: "Ejemplo: +504 3318-0857" }
+          - { name: instagram, label: Enlace de Instagram, type: string }
+          - { name: mensaje_general, label: Mensaje del botón "Escríbanos", type: string }
+
+      # ---------- Portada ----------
+      - name: portada
+        label: Portada (lo primero que se ve)
+        type: object
+        fields:
+          - { name: pregunta_inicio, label: Inicio del titular, type: string, description: "Va antes de la palabra que cambia. Ej.: ¿Vende" }
+          - { name: linea_dos, label: Segunda línea del titular, type: string }
+          - { name: descripcion, label: Párrafo debajo del titular, type: text }
+          - { name: boton_principal, label: Texto del botón azul, type: string }
+          - { name: mensaje_boton_principal, label: Mensaje de WhatsApp del botón azul, type: string }
+          - { name: boton_secundario, label: Texto del segundo botón, type: string }
+          - { name: texto_debajo, label: Texto junto al nombre del negocio de ejemplo, type: string }
+
+      - name: cinta
+        label: Cinta de giros (palabras que se desplazan)
+        type: string
+        list: true
+
+      # ---------- Productos ----------
+      - name: productos
+        label: Productos (pantallas a pantalla completa)
+        type: object
+        list: true
+        description: "El orden de la lista es el orden en la página. Puede agregar, quitar o mover productos."
+        fields:
+          - { name: nombre, label: Nombre del producto, type: string, required: true }
+          - { name: frase, label: Frase, type: string, description: "Ponga entre asteriscos la parte que va en cursiva de color. Ej.: Cobre rápido y *con factura legal.*" }
+          - { name: puntos, label: Puntos (se recomiendan 3), type: string, list: true }
+          - { name: boton, label: Texto del botón, type: string }
+          - { name: mensaje_whatsapp, label: Mensaje de WhatsApp del botón, type: string }
+          - { name: color_fondo, label: Color de fondo, type: string, pattern: "^#[0-9A-Fa-f]{6}$", description: "Código de color oscuro, ej.: #0B2A8F" }
+          - { name: color_acento, label: Color de acento, type: string, pattern: "^#[0-9A-Fa-f]{6}$", description: "Código de color claro, ej.: #9DB4FF" }
+          - name: tipo_imagen
+            label: Cómo se muestran las imágenes
+            type: select
+            options:
+              values:
+                - { name: computadora, label: "Pantalla de computadora (1 imagen)" }
+                - { name: celulares, label: "Dos celulares que se desplazan (catálogos largos)" }
+                - { name: celulares_fijos, label: "Dos celulares fijos (pantallas de app)" }
+                - { name: palabras, label: "Solo palabras grandes (sin imágenes)" }
+          - name: imagenes
+            label: Imágenes
+            type: image
+            options:
+              multiple: { max: 2 }
+              path: subidas
+          - { name: palabras, label: Palabras grandes (solo si eligió "Solo palabras"), type: string, list: true }
+
+      # ---------- ¿Qué vende usted? ----------
+      - name: pruebe
+        label: Sección "¿Qué vende usted?"
+        type: object
+        fields:
+          - { name: titulo, label: Título, type: string, description: "Use *asteriscos* para la parte en cursiva." }
+          - { name: descripcion, label: Descripción, type: text }
+          - { name: boton, label: Texto del botón, type: string }
+
+      - name: giros
+        label: Giros de negocio (botones de "¿Qué vende usted?" y palabra de la portada)
+        type: object
+        list: true
+        fields:
+          - { name: boton, label: Texto del botón, type: string, required: true, description: "Ej.: Ferretería" }
+          - { name: palabra, label: Palabra en la portada, type: string, description: "Ej.: herramientas → ¿Vende herramientas?" }
+          - { name: negocio, label: Nombre del negocio de ejemplo, type: string }
+          - { name: frase, label: Frase para el mensaje, type: string, description: "Ej.: una ferretería → Tengo una ferretería y quiero DRC System" }
+          - { name: img_venta, label: Pantalla de venta (computadora), type: image, required: true, options: { path: subidas } }
+          - { name: img_inventario, label: Pantalla de inventario (computadora), type: image, required: true, options: { path: subidas } }
+          - { name: img_catalogo, label: Catálogo web (captura larga de celular), type: image, required: true, options: { path: subidas } }
+
+      # ---------- Antes / Después ----------
+      - name: antes_despues
+        label: Antes / Después
+        type: object
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - name: imagenes_despues
+            label: Catálogos del lado "Después"
+            type: image
+            options:
+              multiple: { max: 2 }
+              path: subidas
+
+      # ---------- Mantenimiento ----------
+      - name: mantenimiento
+        label: Mantenimiento de computadoras
+        type: object
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - { name: descripcion, label: Descripción, type: text }
+          - name: servicios
+            label: Servicios
+            type: object
+            list: true
+            fields:
+              - { name: nombre, label: Servicio, type: string }
+              - { name: detalle, label: Detalle, type: string }
+          - name: modalidades
+            label: Modalidades (botones)
+            type: object
+            list: true
+            fields:
+              - { name: nombre, label: Nombre, type: string }
+              - { name: detalle, label: Detalle, type: string }
+              - { name: mensaje_whatsapp, label: Mensaje de WhatsApp, type: string }
+
+      # ---------- Clientes ----------
+      - name: clientes
+        label: Clientes
+        type: object
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - name: lista
+            label: Negocios
+            type: object
+            list: true
+            fields:
+              - { name: nombre, label: Nombre del negocio, type: string, required: true }
+              - { name: descripcion, label: Descripción corta, type: string, description: "Ej.: Accesorios · Sistema y catálogo web" }
+              - { name: portada, label: Portada (imagen vertical 9:16), type: image, required: true, options: { path: subidas } }
+              - name: video
+                label: Video (opcional, MP4 vertical, máximo unos 10 MB)
+                type: file
+                options:
+                  extensions: [mp4]
+                  path: video
+
+      # ---------- Cierre ----------
+      - name: cierre
+        label: Cierre (final de la página)
+        type: object
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - { name: descripcion, label: Descripción, type: text }
+          - { name: mensaje_whatsapp, label: Mensaje de WhatsApp del botón, type: string }
