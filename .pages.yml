@@ -22,6 +22,7 @@ content:
           - { name: texto_pie, label: Texto del pie de página, type: string }
           - { name: hecho_en, label: Segunda línea del pie, type: string }
           - { name: anio, label: Año del copyright, type: string }
+          - { name: contador_visitas, label: Nombre del contador de visitas (GoatCounter), type: string, description: "Ej.: rodriguezit. Déjelo vacío para apagar el contador." }
 
       # ---------- Contacto ----------
       - name: contacto

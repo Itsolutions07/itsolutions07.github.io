@@ -9,6 +9,9 @@ const esc = (s = '') => String(s)
 const rich = (s = '') => esc(s).replace(/\*(.+?)\*/g, '<em>$1</em>');
 
 const pad = (n) => String(n).padStart(2, '0');
+// Nombre corto para el contador de clics: "Catálogo web" → "catalogo-web"
+const slug = (s = '') => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const gc = (n) => `data-goatcounter-click="${slug(n)}"`;
 const ICON_WA = '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>';
 const ext = (a) => 'target="_blank" rel="noopener"';
 
@@ -45,7 +48,7 @@ export function render(d) {
   const trabajos = d.trabajos?.lista || [];
   const redes = [['instagram', 'Instagram', '#i-ig'], ['facebook', 'Facebook', '#i-fb'], ['tiktok', 'TikTok', '#i-tt']]
     .filter(([k]) => d.contacto[k]).map(([k, n, i]) => ({ url: d.contacto[k], n, i }));
-  const redesHTML = (cls) => redes.length ? `<ul class="social ${cls}">${redes.map((r) => `<li><a href="${esc(r.url)}" ${ext()} aria-label="${r.n}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="${r.i}"/></svg></a></li>`).join('')}</ul>` : '';
+  const redesHTML = (cls) => redes.length ? `<ul class="social ${cls}">${redes.map((r) => `<li><a href="${esc(r.url)}" ${ext()} ${gc('red-' + r.n)} aria-label="${r.n}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="${r.i}"/></svg></a></li>`).join('')}</ul>` : '';
   const dt = d.detras;
   const entregados = (d.entregados?.lista || []).filter((e) => e.enlace);
   const dominio = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } };
@@ -91,6 +94,7 @@ export function render(d) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=${d.__ver}">
+  ${d.general.contador_visitas ? `<script data-goatcounter="https://${esc(d.general.contador_visitas)}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>` : ''}
 </head>
 <body>
 <div class="fx" aria-hidden="true"><i class="fx__luces"></i><i class="fx__f1"></i><i class="fx__f2"></i></div>
@@ -110,7 +114,7 @@ export function render(d) {
     ${preguntas.length ? '<a href="#preguntas">Preguntas</a>' : ''}
   </nav>
   <div class="nav__right">
-    <a class="btn btn--small" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()} aria-label="Escríbanos por WhatsApp">${ICON_WA}<span>Escríbanos</span></a>
+    <a class="btn btn--small" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()} ${gc('whatsapp-menu')} aria-label="Escríbanos por WhatsApp">${ICON_WA}<span>Escríbanos</span></a>
     <button class="nav__menu" id="navMenu" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 8h16M4 16h16"/></svg></button>
   </div>
 </header>
@@ -126,7 +130,7 @@ export function render(d) {
   </h1>
   <p class="hero__lede">${rich(d.portada.descripcion)}</p>
   <div class="hero__actions">
-    <a class="btn" href="${esc(wa(d.portada.mensaje_boton_principal))}" ${ext()}>${ICON_WA} ${esc(d.portada.boton_principal)}</a>
+    <a class="btn" href="${esc(wa(d.portada.mensaje_boton_principal))}" ${ext()} ${gc('whatsapp-portada')}>${ICON_WA} ${esc(d.portada.boton_principal)}</a>
     <a class="btn btn--ghost" href="#productos">${esc(d.portada.boton_secundario)} <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-down"/></svg></a>
   </div>
 
@@ -163,7 +167,7 @@ ${d.productos.map((p, i) => `
         <h2 class="scene__name">${esc(p.nombre)}</h2>
         <p class="scene__claim">${rich(p.frase)}</p>
         <ul class="scene__list">${(p.puntos || []).map((t) => `<li>${esc(t)}</li>`).join('')}</ul>
-        <a class="btn btn--light" ${ext()} href="${esc(wa(p.mensaje_whatsapp))}">${esc(p.boton)}</a>
+        <a class="btn btn--light" ${ext()} ${gc('whatsapp-producto-' + p.nombre)} href="${esc(wa(p.mensaje_whatsapp))}">${esc(p.boton)}</a>
       </div>
       ${arte(p)}
     </article>`).join('')}
@@ -178,7 +182,7 @@ ${d.productos.map((p, i) => `
   <div class="chips-nav"><span class="hs__hint">Deslice para ver más <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg></span><span class="hs__count" id="giroCount">1 / ${d.giros.length}</span><button class="hs__btn" data-g="-1" aria-label="Giro anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 6-6 6 6 6"/></svg></button><button class="hs__btn" data-g="1" aria-label="Siguiente giro"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></svg></button></div>
   <div class="chips-wrap">
   <div class="chips" role="tablist" aria-label="Tipo de negocio" id="chips">
-    ${d.giros.map((g, i) => `<button role="tab" aria-selected="${i === 0}" data-i="${i}">${esc(g.boton)}</button>`).join('\n    ')}
+    ${d.giros.map((g, i) => `<button role="tab" aria-selected="${i === 0}" data-i="${i}" ${gc('giro-' + g.boton)}>${esc(g.boton)}</button>`).join('\n    ')}
   </div>
   </div>
   <div class="try__stage" id="tryStage">
@@ -193,7 +197,7 @@ ${d.productos.map((p, i) => `
   </div>
   <div class="try__cta">
     <p id="tryMsg">“Tengo <strong>${esc(g0.frase)}</strong> y quiero DRC System.”</p>
-    <a class="btn" id="tryBtn" ${ext()} href="${esc(wa(`Hola, tengo ${g0.frase} y quiero DRC System`))}">${ICON_WA} ${esc(d.pruebe.boton)}</a>
+    <a class="btn" id="tryBtn" ${ext()} ${gc('whatsapp-giro-' + g0.boton)} href="${esc(wa(`Hola, tengo ${g0.frase} y quiero DRC System`))}">${ICON_WA} ${esc(d.pruebe.boton)}</a>
   </div>
 </section>
 
@@ -234,7 +238,7 @@ ${d.productos.map((p, i) => `
         ${d.mantenimiento.servicios.map((s, i) => `<li data-p="${i}"><b>${esc(s.nombre)}</b><span>${esc(s.detalle)}</span>${s.foto ? `<img class="fix__thumb" loading="lazy" src="${esc(s.foto)}" alt="${esc(s.nombre)}: trabajo real" width="1200" height="900">` : ''}</li>`).join('\n        ')}
       </ol>
       <div class="fix__modes">
-        ${d.mantenimiento.modalidades.map((m) => `<a href="${esc(wa(m.mensaje_whatsapp))}" ${ext()}><b>${esc(m.nombre)}</b><span>${esc(m.detalle)}</span></a>`).join('\n        ')}
+        ${d.mantenimiento.modalidades.map((m) => `<a href="${esc(wa(m.mensaje_whatsapp))}" ${ext()} ${gc('whatsapp-mantenimiento-' + m.nombre)}><b>${esc(m.nombre)}</b><span>${esc(m.detalle)}</span></a>`).join('\n        ')}
       </div>
     </div>
     <div class="fix__art">
@@ -254,7 +258,7 @@ ${trabajos.length ? `<section class="jobs" id="trabajos">
   <div class="jobs__row hs-row" id="jobsRow">
 ${trabajos.map((t) => `    <figure class="job${t.video ? ' job--video' : ''}">
       ${t.video
-        ? `<button class="job__media" data-video="${esc(t.video)}" data-wide aria-label="Ver video: ${esc(t.trabajo)}">
+        ? `<button class="job__media" data-video="${esc(t.video)}" data-wide ${gc('video-trabajo-' + t.equipo)} aria-label="Ver video: ${esc(t.trabajo)}">
         <video muted loop playsinline preload="none" poster="${esc(t.foto)}" data-src="${esc(t.video)}"></video>
         <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-play"/></svg></span>
       </button>`
@@ -269,7 +273,7 @@ ${trabajos.map((t) => `    <figure class="job${t.video ? ' job--video' : ''}">
   <div class="hs__ctrl" data-for="casesRow"><span class="hs__hint">Deslice para ver más <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg></span><button class="hs__btn" data-dir="-1" aria-label="Ver anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 6-6 6 6 6"/></svg></button><button class="hs__btn" data-dir="1" aria-label="Ver más"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></svg></button></div>
   <div class="cases__row hs-row" id="casesRow">
 ${d.clientes.lista.map((c) => `    <figure class="case">
-      <button class="case__media"${c.video ? ` data-video="${esc(c.video)}"` : ''} aria-label="${c.video ? 'Ver video de ' : ''}${esc(c.nombre)}">
+      <button class="case__media"${c.video ? ` data-video="${esc(c.video)}" ${gc('video-cliente-' + c.nombre)}` : ''} aria-label="${c.video ? 'Ver video de ' : ''}${esc(c.nombre)}">
         <img loading="lazy" src="${esc(c.portada)}" alt="" width="540" height="960">
         ${c.video ? '<span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-play"/></svg></span>' : ''}
       </button>
@@ -284,7 +288,7 @@ ${entregados.length ? `<section class="live" id="entregados">
     <p class="lede">${rich(d.entregados.descripcion)}</p>
   </div>
   <div class="live__grid">
-${entregados.map((e) => `    <a class="link-card" href="${esc(e.enlace)}" ${ext()}>
+${entregados.map((e) => `    <a class="link-card" href="${esc(e.enlace)}" ${ext()} ${gc('ver-catalogo-' + e.nombre)}>
       <span class="link-card__img" style="background:${esc(/^#[0-9a-f]{3,8}$/i.test(e.fondo || '') ? e.fondo : '#000')}"><img loading="lazy" src="${esc(e.imagen)}" alt="Vista previa de ${esc(e.nombre)}" width="1200" height="630"></span>
       <span class="link-card__body">
         <b>${esc(e.titulo || e.nombre)}</b>
@@ -311,7 +315,7 @@ ${dt && dt.foto_principal ? `<section class="team" id="nosotros">
     <p class="lede">${rich(dt.texto)}</p>
     ${(dt.puntos || []).length ? `<ul class="team__list">${dt.puntos.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
     ${dt.nombre || dt.cargo ? `<p class="team__sign">${dt.nombre ? `<b>${esc(dt.nombre)}</b>` : ''}${dt.cargo ? `<span>${esc(dt.cargo)}</span>` : ''}</p>` : ''}
-    <a class="btn" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()}>${ICON_WA} Hablemos</a>
+    <a class="btn" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()} ${gc('whatsapp-nosotros')}>${ICON_WA} Hablemos</a>
   </div>
 </section>` : ''}
 
@@ -347,13 +351,13 @@ ${preguntas.map((q) => `    <details class="faq__item">
   </div>
   <h2 class="close__title">${rich(d.cierre.titulo)}</h2>
   <p class="lede">${rich(d.cierre.descripcion)}</p>
-  <a class="btn btn--xl" href="${esc(wa(d.cierre.mensaje_whatsapp))}" ${ext()}>${ICON_WA} ${esc(d.contacto.whatsapp_visible)}</a>
+  <a class="btn btn--xl" href="${esc(wa(d.cierre.mensaje_whatsapp))}" ${ext()} ${gc('whatsapp-final')}>${ICON_WA} ${esc(d.contacto.whatsapp_visible)}</a>
   ${redesHTML('social--close')}
 </section>
 
 </main>
 
-${d.contacto.boton_flotante !== false ? `<a class="wa-float" id="waFloat" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()} aria-label="Escríbanos por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></a>` : ''}
+${d.contacto.boton_flotante !== false ? `<a class="wa-float" id="waFloat" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()} ${gc('whatsapp-flotante')} aria-label="Escríbanos por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></a>` : ''}
 
 <footer class="foot">
   <div class="foot__grid">
@@ -379,8 +383,8 @@ ${d.contacto.boton_flotante !== false ? `<a class="wa-float" id="waFloat" href="
     <div class="foot__col">
       <h3>Contacto</h3>
       <ul>
-        <li><a href="${esc(wa(d.contacto.mensaje_general))}" ${ext()}>WhatsApp ${esc(d.contacto.whatsapp_visible)}</a></li>
-        ${redes.map((r) => `<li><a href="${esc(r.url)}" ${ext()}>${r.n}</a></li>`).join('')}
+        <li><a href="${esc(wa(d.contacto.mensaje_general))}" ${ext()} ${gc('whatsapp-pie')}>WhatsApp ${esc(d.contacto.whatsapp_visible)}</a></li>
+        ${redes.map((r) => `<li><a href="${esc(r.url)}" ${ext()} ${gc('red-' + r.n)}>${r.n}</a></li>`).join('')}
       </ul>
     </div>
   </div>

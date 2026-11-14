@@ -216,6 +216,8 @@
     tryMsg.textContent = '';
     tryMsg.append('“Tengo ', Object.assign(document.createElement('strong'), { textContent: tryT }), ' y quiero DRC System.”');
     tryBtn.href = WA + encodeURIComponent(`Hola, tengo ${tryT} y quiero DRC System`);
+    const sel = chips.find((c) => c.getAttribute('aria-selected') === 'true');
+    if (sel) tryBtn.dataset.goatcounterClick = 'whatsapp-' + sel.dataset.goatcounterClick;
   }
   chips.forEach((b) => b.addEventListener('click', () => {
     chips.forEach((c) => c.setAttribute('aria-selected', String(c === b)));
