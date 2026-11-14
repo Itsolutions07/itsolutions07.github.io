@@ -224,7 +224,7 @@ ${d.productos.map((p, i) => `
 <section class="fix" id="mantenimiento">
   <div class="fix__sticky">
     <div class="fix__text">
-      <h2 class="h2">${rich(d.mantenimiento.titulo)}</h2>
+      <h2 class="h2">${rich(d.mantenimiento.titulo).replace(/^([^<]+)/, '<span class="nw">$1</span>')}</h2>
       <p class="lede">${rich(d.mantenimiento.descripcion)}</p>
       <ol class="fix__list" id="fixList">
         ${d.mantenimiento.servicios.map((s, i) => `<li data-p="${i}"><b>${esc(s.nombre)}</b><span>${esc(s.detalle)}</span></li>`).join('\n        ')}

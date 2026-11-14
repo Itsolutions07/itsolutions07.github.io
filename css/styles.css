@@ -521,6 +521,10 @@ html { scrollbar-color: #2A3563 var(--night); }
   padding: 90px var(--gutter) 40px;
   max-width: var(--maxw); margin: 0 auto;
 }
+/* Título: "Su computadora," en una línea y "como nueva." abajo */
+.fix .h2 { max-width: none; }
+.fix .h2 em { display: block; }
+.fix .h2 .nw { white-space: nowrap; }
 .fix__list { list-style: none; padding: 0; margin: 28px 0; display: grid; gap: 4px; counter-reset: f; }
 .fix__list li { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--muted); transition: color 300ms var(--ease-out); }
 .fix__list li::before { counter-increment: f; content: counter(f); grid-row: span 2; font-family: var(--f-display); font-weight: 700; font-size: 1.3rem; color: rgba(167,176,204,.4); width: 1.2em; transition: color 300ms; }
