@@ -93,6 +93,7 @@ export function render(d) {
   <link rel="stylesheet" href="css/styles.css?v=${d.__ver}">
 </head>
 <body>
+<div class="fx" aria-hidden="true"><i class="fx__luces"></i><i class="fx__f1"></i><i class="fx__f2"></i></div>
 
 <header class="nav" id="nav">
   <a class="nav__brand" href="#inicio" aria-label="Rodriguez IT Solutions, inicio">
@@ -335,7 +336,7 @@ ${preguntas.map((q) => `    <details class="faq__item">
 </section>` : ''}
 
 <section class="close" id="contacto">
-  <svg class="ribbon" id="ribbon" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M-40 420 C 220 120, 420 560, 640 300 S 980 40, 1140 260 S 1380 520, 1500 180"/></svg>
+  <svg class="ribbon" id="ribbon" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true"><path class="ribbon__line" pathLength="1" d="M-40 420 C 220 120, 420 560, 640 300 S 980 40, 1140 260 S 1380 520, 1500 180"/><path class="ribbon__pulse" pathLength="1" d="M-40 420 C 220 120, 420 560, 640 300 S 980 40, 1140 260 S 1380 520, 1500 180"/></svg>
   <div class="floaters" aria-hidden="true">
     <span style="--x:8%;--y:22%;--d:0s;--s:1"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></svg></span>
     <span style="--x:86%;--y:18%;--d:-2s;--s:1.2"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg></span>

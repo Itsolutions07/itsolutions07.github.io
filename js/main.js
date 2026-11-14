@@ -330,7 +330,10 @@
 
   /* ---------- Cierre: la línea de luz se dibuja al llegar ---------- */
   const ribbon = $('#ribbon');
-  if (ribbon) new IntersectionObserver((ents, o) => ents.forEach((e) => { if (e.isIntersecting) { ribbon.classList.add('is-drawn'); o.disconnect(); } }), { threshold: 0.3 }).observe(ribbon);
+  if (ribbon) new IntersectionObserver((ents) => ents.forEach((e) => {
+    if (e.intersectionRatio >= 0.55) ribbon.classList.add('is-drawn');
+    else if (!e.isIntersecting) ribbon.classList.remove('is-drawn');
+  }), { threshold: [0, 0.55] }).observe(ribbon);
 
   /* ---------- Botón Atrás del teléfono: regresa a la sección anterior ---------- */
   (() => {
