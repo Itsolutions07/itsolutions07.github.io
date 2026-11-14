@@ -12,19 +12,21 @@ Panel para editar: https://app.pagescms.org (iniciar sesión con GitHub)
 - [ ] **Poner el enlace de la página** en la biografía de Instagram, Facebook y TikTok.
 - [ ] **Nombre en "Quién está detrás"** (opcional): agregarlo en el panel si lo quiere mostrar.
 - [ ] **Entrar al panel** una vez para confirmar que puede editar.
+- [ ] **GoatCounter:** verificar el correo (enlace del correo de bienvenida) y abrir `https://itsolutions07.github.io/#toggle-goatcounter` en sus propios aparatos para que sus visitas no se cuenten.
 - [ ] **Dominio propio** cuando sea posible (se conecta sin rehacer nada).
 - [ ] **Publicar los volantes nuevos** en Instagram/Facebook: "Servicios a distancia 2026" y "Servicios a domicilio 2026" (carpeta Publicidad). Los viejos tienen 9439-7031 / 9794-3213.
 
 ## Lo que puedo hacer yo cuando me diga
 
 - [ ] Agregar **ZUTILS Salón** a "Sistemas entregados" (falta un enlace o demo).
-- [ ] **Contador de visitas** gratis y sin avisos de cookies.
 - [ ] Botón **"Pruebe el sistema"** si la demo en línea funciona.
 - [ ] Sección de **Planes / Pida su cotización**.
 - [ ] **Videos en cámara rápida** de nuevas reparaciones.
 - [ ] Ayudarle a registrar la página en **Google Search Console** y crear el **Perfil de Empresa de Google (Maps)**.
 
 ## Hecho
+
+- Contador de visitas GoatCounter: https://rodriguezit.goatcounter.com (cuenta del usuario). Cuenta visitas y clics en botones.
 
 - Página publicada con panel de administración y publicación automática.
 - Fotos reales de mantenimiento, trabajos recientes y video en cámara rápida.
