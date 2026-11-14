@@ -347,7 +347,7 @@ ${d.contacto.boton_flotante !== false ? `<a class="wa-float" id="waFloat" href="
         <img src="assets/img/logo-rit.webp" alt="" width="56" height="56">
         <span><b>Rodriguez <em>IT</em> Solutions</b><small>Ingeniería en Sistemas · Honduras</small></span>
       </a>
-      <p>${esc(d.general.texto_pie)} ${esc(d.general.hecho_en)}</p>
+      <p class="foot__drc"><img src="assets/img/logo-drc.webp" alt="DRC System" width="40" height="44"><span>${esc(d.general.texto_pie)} ${esc(d.general.hecho_en)}</span></p>
       ${redesHTML('social--foot')}
     </div>
     <nav class="foot__col" aria-label="Secciones">
