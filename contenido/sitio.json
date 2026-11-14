@@ -13,8 +13,8 @@
     "instagram": "https://www.instagram.com/itsolutions.rodriguez/",
     "mensaje_general": "Hola, quiero información de Rodriguez IT Solutions",
     "boton_flotante": true,
-    "facebook": "",
-    "tiktok": ""
+    "facebook": "https://www.facebook.com/profile.php?id=61576382743518",
+    "tiktok": "https://www.tiktok.com/@itsolutions.rodriguez"
   },
   "portada": {
     "pregunta_inicio": "¿Vende",
@@ -381,6 +381,28 @@
         "descripcion": "DRC System para cualquier giro",
         "portada": "/assets/img/casos/Vendas_lo_que_vendas_v3.webp",
         "video": "/assets/video/Vendas_lo_que_vendas_v3.mp4"
+      }
+    ]
+  },
+  "entregados": {
+    "titulo": "Sistemas *entregados.*",
+    "descripcion": "Son catálogos reales de nuestros clientes. Entre y véalos funcionando.",
+    "lista": [
+      {
+        "nombre": "Lovesita",
+        "titulo": "Lovesita — Joyería y detalles hechos a mano",
+        "descripcion": "Joyería y detalles artesanales hechos a mano, por encargo. Pedidos por WhatsApp.",
+        "imagen": "/assets/img/entregados/lovesita.webp",
+        "fondo": "#F2EFE9",
+        "enlace": "https://catalagolovesita.web.app/"
+      },
+      {
+        "nombre": "Leonor Boutique",
+        "titulo": "Leonor Boutique — Accesorios para tus momentos especiales",
+        "descripcion": "Coronas, peinetas, velos, collares y más. Envíos a todo Honduras. Pedidos por WhatsApp.",
+        "imagen": "/assets/img/entregados/leonor.webp",
+        "fondo": "#000000",
+        "enlace": "https://catalago-leonorboutique.web.app/"
       }
     ]
   },

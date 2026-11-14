@@ -47,6 +47,8 @@ export function render(d) {
     .filter(([k]) => d.contacto[k]).map(([k, n, i]) => ({ url: d.contacto[k], n, i }));
   const redesHTML = (cls) => redes.length ? `<ul class="social ${cls}">${redes.map((r) => `<li><a href="${esc(r.url)}" ${ext()} aria-label="${r.n}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="${r.i}"/></svg></a></li>`).join('')}</ul>` : '';
   const dt = d.detras;
+  const entregados = (d.entregados?.lista || []).filter((e) => e.enlace);
+  const dominio = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } };
   const testimonios = (d.testimonios?.lista || []).filter((t) => t.texto && t.nombre);
   const preguntas = (d.preguntas?.lista || []).filter((q) => q.pregunta && q.respuesta);
   const fotosFix = d.mantenimiento.servicios.map((s, i) => ({ src: s.foto, k: i, alt: s.nombre })).filter((f) => f.src);
@@ -103,6 +105,7 @@ export function render(d) {
     <a href="#pruebe">Su negocio</a>
     <a href="#mantenimiento">Mantenimiento</a>
     <a href="#casos">Clientes</a>
+    ${entregados.length ? '<a href="#entregados">En acción</a>' : ''}
     ${preguntas.length ? '<a href="#preguntas">Preguntas</a>' : ''}
   </nav>
   <div class="nav__right">
@@ -267,6 +270,23 @@ ${d.clientes.lista.map((c) => `    <figure class="case">
     </figure>`).join('\n')}
   </div>
 </section>
+
+${entregados.length ? `<section class="live" id="entregados">
+  <div class="live__head">
+    <h2 class="h2">${rich(d.entregados.titulo)}</h2>
+    <p class="lede">${rich(d.entregados.descripcion)}</p>
+  </div>
+  <div class="live__grid">
+${entregados.map((e) => `    <a class="link-card" href="${esc(e.enlace)}" ${ext()}>
+      <span class="link-card__img" style="background:${esc(/^#[0-9a-f]{3,8}$/i.test(e.fondo || '') ? e.fondo : '#000')}"><img loading="lazy" src="${esc(e.imagen)}" alt="Vista previa de ${esc(e.nombre)}" width="1200" height="630"></span>
+      <span class="link-card__body">
+        <b>${esc(e.titulo || e.nombre)}</b>
+        ${e.descripcion ? `<span class="link-card__desc">${esc(e.descripcion)}</span>` : ''}
+        <span class="link-card__foot"><span>${esc(dominio(e.enlace))}</span><span class="link-card__go">Ver en acción <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/></svg></span></span>
+      </span>
+    </a>`).join('\n')}
+  </div>
+</section>` : ''}
 
 ${dt && dt.foto_principal ? `<section class="team" id="nosotros">
   <div class="team__media">

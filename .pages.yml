@@ -194,6 +194,25 @@ content:
                   extensions: [mp4]
                   path: video
 
+      # ---------- Sistemas entregados ----------
+      - name: entregados
+        label: Sistemas entregados (enlaces para verlos en acción)
+        type: object
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - { name: descripcion, label: Descripción, type: text }
+          - name: lista
+            label: Sistemas
+            type: object
+            list: true
+            fields:
+              - { name: nombre, label: Nombre del negocio, type: string, required: true }
+              - { name: titulo, label: Título de la tarjeta, type: string }
+              - { name: descripcion, label: Descripción, type: text }
+              - { name: imagen, label: Imagen (horizontal, como la vista previa de WhatsApp), type: image, required: true, options: { path: subidas } }
+              - { name: fondo, label: Color de fondo de la imagen, type: string, pattern: "^#[0-9A-Fa-f]{6}$", description: "Se ve si la imagen no llena el espacio. Ej.: #000000" }
+              - { name: enlace, label: Enlace del sistema, type: string, required: true }
+
       # ---------- Quién está detrás ----------
       - name: detras
         label: Quién está detrás
