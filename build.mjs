@@ -12,7 +12,8 @@ const datos = JSON.parse(readFileSync('contenido/sitio.json', 'utf8'));
 let base = process.env.SITE_URL || '';
 if (base && !base.endsWith('/')) base += '/';
 datos.__base = base;
-datos.__ver = Date.now().toString(36); // evita que los celulares usen archivos viejos
+datos.__ver = Date.now().toString(36);
+datos.__ogv = createHash('md5').update(readFileSync('assets/img/og-image.jpg')).digest('hex').slice(0, 8); // evita que los celulares usen archivos viejos
 
 // Revisión básica para que un error en el panel no rompa la página
 const faltan = [];

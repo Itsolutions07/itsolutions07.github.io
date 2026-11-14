@@ -192,6 +192,21 @@ content:
                   extensions: [mp4]
                   path: video
 
+      # ---------- Quién está detrás ----------
+      - name: detras
+        label: Quién está detrás
+        type: object
+        fields:
+          - { name: titulo, label: Título, type: string, description: "Use *asteriscos* para la parte en cursiva." }
+          - { name: texto, label: Texto, type: text }
+          - { name: puntos, label: Puntos, type: string, list: true }
+          - { name: foto_principal, label: Foto principal, type: image, options: { path: subidas } }
+          - { name: texto_foto_principal, label: Texto debajo de la foto principal, type: string }
+          - { name: foto_secundaria, label: Foto pequeña (opcional), type: image, options: { path: subidas } }
+          - { name: texto_foto_secundaria, label: Texto debajo de la foto pequeña, type: string }
+          - { name: nombre, label: Su nombre (opcional), type: string, description: "Si lo deja vacío, no se muestra." }
+          - { name: cargo, label: Cargo (opcional), type: string, description: "Ej.: Fundador y programador" }
+
       # ---------- Testimonios ----------
       - name: testimonios
         label: Testimonios (lo que dicen los clientes)

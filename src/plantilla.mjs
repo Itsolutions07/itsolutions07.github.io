@@ -43,6 +43,7 @@ export function render(d) {
 
   const cinta = d.cinta.map((c) => `<span>${esc(c)}</span><i></i>`).join('');
   const trabajos = d.trabajos?.lista || [];
+  const dt = d.detras;
   const testimonios = (d.testimonios?.lista || []).filter((t) => t.texto && t.nombre);
   const preguntas = (d.preguntas?.lista || []).filter((q) => q.pregunta && q.respuesta);
   const fotosFix = d.mantenimiento.servicios.map((s, i) => ({ src: s.foto, k: i, alt: s.nombre })).filter((f) => f.src);
@@ -62,7 +63,7 @@ export function render(d) {
   <meta property="og:site_name" content="Rodriguez IT Solutions">
   <meta property="og:title" content="${esc(d.general.titulo_al_compartir)}">
   <meta property="og:description" content="${esc(d.general.descripcion_google)}">
-  <meta property="og:image" content="${esc(d.__base || '')}assets/img/og-image.jpg">
+  <meta property="og:image" content="${esc(d.__base || '')}assets/img/og-image.jpg${d.__ogv ? '?v=' + d.__ogv : ''}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -262,6 +263,26 @@ ${d.clientes.lista.map((c) => `    <figure class="case">
     </figure>`).join('\n')}
   </div>
 </section>
+
+${dt && dt.foto_principal ? `<section class="team" id="nosotros">
+  <div class="team__media">
+    <figure class="team__main">
+      <img loading="lazy" src="${esc(dt.foto_principal)}" alt="${esc(dt.texto_foto_principal || 'Lugar de trabajo de Rodriguez IT Solutions')}" width="1280" height="960">
+      ${dt.texto_foto_principal ? `<figcaption>${esc(dt.texto_foto_principal)}</figcaption>` : ''}
+    </figure>
+    ${dt.foto_secundaria ? `<figure class="team__sub">
+      <img loading="lazy" src="${esc(dt.foto_secundaria)}" alt="${esc(dt.texto_foto_secundaria || 'Programando un sistema')}" width="1000" height="563">
+      ${dt.texto_foto_secundaria ? `<figcaption>${esc(dt.texto_foto_secundaria)}</figcaption>` : ''}
+    </figure>` : ''}
+  </div>
+  <div class="team__text">
+    <h2 class="h2">${rich(dt.titulo)}</h2>
+    <p class="lede">${rich(dt.texto)}</p>
+    ${(dt.puntos || []).length ? `<ul class="team__list">${dt.puntos.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
+    ${dt.nombre ? `<p class="team__sign"><b>${esc(dt.nombre)}</b>${dt.cargo ? `<span>${esc(dt.cargo)}</span>` : ''}</p>` : ''}
+    <a class="btn" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()}>${ICON_WA} Hablemos</a>
+  </div>
+</section>` : ''}
 
 ${testimonios.length ? `<section class="quotes" id="testimonios">
   <h2 class="h2">${rich(d.testimonios.titulo)}</h2>

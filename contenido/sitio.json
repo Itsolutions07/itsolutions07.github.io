@@ -2,7 +2,7 @@
   "general": {
     "titulo_pestana": "Rodriguez IT Solutions · DRC System",
     "descripcion_google": "Facturación con CAI, inventario, contabilidad, catálogo web, apps a la medida y mantenimiento de computadoras. Rodriguez IT Solutions, Honduras.",
-    "titulo_al_compartir": "¿Vende baleadas? Su negocio cabe aquí · DRC System",
+    "titulo_al_compartir": "Rodriguez IT Solutions · Sistemas para su negocio",
     "texto_pie": "DRC System es un producto de Rodriguez IT Solutions.",
     "hecho_en": "Hecho en Honduras.",
     "anio": "2026"
@@ -24,14 +24,14 @@
     "texto_debajo": "su sistema y su catálogo"
   },
   "cinta": [
-    "Baleadas",
+    "Comida",
     "Ropa",
     "Repuestos",
-    "Medicinas",
-    "Pan dulce",
-    "Uñas",
+    "Farmacias",
+    "Repostería",
+    "Belleza",
     "Celulares",
-    "Ferretería",
+    "Ferreterías",
     "Salones",
     "Boutiques"
   ],
@@ -158,10 +158,10 @@
   },
   "giros": [
     {
-      "boton": "Baleadas",
-      "palabra": "baleadas",
+      "boton": "Comida",
+      "palabra": "comida",
       "negocio": "Baleadas Doña Mary",
-      "frase": "una baleadería",
+      "frase": "un negocio de comida",
       "img_venta": "/assets/img/giros/baleadas-venta.webp",
       "img_inventario": "/assets/img/giros/baleadas-inv.webp",
       "img_catalogo": "/assets/img/giros/baleadas-cat.webp"
@@ -186,7 +186,7 @@
     },
     {
       "boton": "Farmacia",
-      "palabra": "medicinas",
+      "palabra": "medicamentos",
       "negocio": "Farmacia San Rafael",
       "frase": "una farmacia",
       "img_venta": "/assets/img/giros/farmacia-venta.webp",
@@ -194,19 +194,19 @@
       "img_catalogo": "/assets/img/giros/farmacia-cat.webp"
     },
     {
-      "boton": "Pan dulce",
-      "palabra": "pan dulce",
+      "boton": "Repostería",
+      "palabra": "repostería",
       "negocio": "Panadería La Espiga",
-      "frase": "una panadería",
+      "frase": "una repostería",
       "img_venta": "/assets/img/giros/pan-venta.webp",
       "img_inventario": "/assets/img/giros/pan-inv.webp",
       "img_catalogo": "/assets/img/giros/pan-cat.webp"
     },
     {
-      "boton": "Uñas",
-      "palabra": "uñas",
+      "boton": "Belleza",
+      "palabra": "cosméticos",
       "negocio": "Nails & Beauty",
-      "frase": "un negocio de uñas",
+      "frase": "un salón de belleza",
       "img_venta": "/assets/img/giros/unas-venta.webp",
       "img_inventario": "/assets/img/giros/unas-inv.webp",
       "img_catalogo": "/assets/img/giros/unas-cat.webp"
@@ -381,6 +381,21 @@
         "video": "/assets/video/Vendas_lo_que_vendas_v3.mp4"
       }
     ]
+  },
+  "detras": {
+    "titulo": "Quién está *detrás.*",
+    "texto": "Rodriguez IT Solutions es un emprendimiento hondureño. Quien programa su sistema es quien lo instala, le enseña a usarlo y le atiende cuando necesita ayuda.",
+    "puntos": [
+      "Programado en Honduras y en español",
+      "Trato directo, sin intermediarios",
+      "Cambios a la medida de su negocio"
+    ],
+    "foto_principal": "/assets/img/detras/escritorio.webp",
+    "texto_foto_principal": "Desde aquí se programa DRC System.",
+    "foto_secundaria": "/assets/img/detras/codigo.webp",
+    "texto_foto_secundaria": "Los inicios: el inventario de Leonor Boutique.",
+    "nombre": "",
+    "cargo": ""
   },
   "testimonios": {
     "titulo": "Lo que dicen *nuestros clientes.*",

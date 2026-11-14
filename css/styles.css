@@ -536,6 +536,33 @@ html { scrollbar-color: #2A3563 var(--night); }
 }
 
 /* ==========================================================
+   QUIÉN ESTÁ DETRÁS
+   ========================================================== */
+.team {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center;
+  gap: clamp(32px, 6vw, 96px);
+  padding: clamp(100px, 14vh, 160px) var(--gutter) 0; max-width: var(--maxw); margin: 0 auto;
+}
+.team__media { position: relative; padding-bottom: 12%; }
+.team figure { margin: 0; }
+.team__main img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 22px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.7); }
+.team__sub { position: absolute; right: -4%; bottom: 0; width: 48%; }
+.team__sub img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 14px; border: 4px solid var(--night); box-shadow: 0 24px 50px -16px rgba(0,0,0,.8); }
+.team figcaption { margin-top: 10px; color: var(--muted); font-size: .88rem; }
+.team__main figcaption { max-width: 48%; }
+.team__text { display: grid; gap: 22px; justify-items: start; }
+.team__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.team__list li { display: flex; gap: 12px; align-items: baseline; font-size: 1.05rem; }
+.team__list li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--sky); transform: translateY(-2px); }
+.team__sign { margin: 0; display: grid; }
+.team__sign b { font-family: var(--f-display); font-size: 1.2rem; }
+.team__sign span { color: var(--muted); font-size: .92rem; }
+@media (max-width: 900px) {
+  .team { grid-template-columns: 1fr; }
+  .team__sub { right: 0; }
+}
+
+/* ==========================================================
    TESTIMONIOS
    ========================================================== */
 .quotes { padding: clamp(60px, 10vh, 120px) var(--gutter) 0; max-width: var(--maxw); margin: 0 auto; }
