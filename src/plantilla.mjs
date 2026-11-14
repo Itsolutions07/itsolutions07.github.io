@@ -109,7 +109,7 @@ export function render(d) {
     ${preguntas.length ? '<a href="#preguntas">Preguntas</a>' : ''}
   </nav>
   <div class="nav__right">
-    <a class="btn btn--small" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()}>${ICON_WA}<span>Escríbanos</span></a>
+    <a class="btn btn--small" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()} aria-label="Escríbanos por WhatsApp">${ICON_WA}<span>Escríbanos</span></a>
     <button class="nav__menu" id="navMenu" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 8h16M4 16h16"/></svg></button>
   </div>
 </header>
@@ -227,7 +227,7 @@ ${d.productos.map((p, i) => `
       <h2 class="h2">${rich(d.mantenimiento.titulo).replace(/^([^<]+)/, '<span class="nw">$1</span>')}</h2>
       <p class="lede">${rich(d.mantenimiento.descripcion)}</p>
       <ol class="fix__list" id="fixList">
-        ${d.mantenimiento.servicios.map((s, i) => `<li data-p="${i}"><b>${esc(s.nombre)}</b><span>${esc(s.detalle)}</span></li>`).join('\n        ')}
+        ${d.mantenimiento.servicios.map((s, i) => `<li data-p="${i}"><b>${esc(s.nombre)}</b><span>${esc(s.detalle)}</span>${s.foto ? `<img class="fix__thumb" loading="lazy" src="${esc(s.foto)}" alt="${esc(s.nombre)}: trabajo real" width="1200" height="900">` : ''}</li>`).join('\n        ')}
       </ol>
       <div class="fix__modes">
         ${d.mantenimiento.modalidades.map((m) => `<a href="${esc(wa(m.mensaje_whatsapp))}" ${ext()}><b>${esc(m.nombre)}</b><span>${esc(m.detalle)}</span></a>`).join('\n        ')}
@@ -246,7 +246,8 @@ ${trabajos.length ? `<section class="jobs" id="trabajos">
     <h2 class="h2">${rich(d.trabajos.titulo)}</h2>
     <p class="lede">${rich(d.trabajos.descripcion)}</p>
   </div>
-  <div class="jobs__row">
+  <div class="hs__ctrl" data-for="jobsRow"><span class="hs__hint">Deslice para ver más <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg></span><button class="hs__btn" data-dir="-1" aria-label="Ver anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 6-6 6 6 6"/></svg></button><button class="hs__btn" data-dir="1" aria-label="Ver más"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></svg></button></div>
+  <div class="jobs__row hs-row" id="jobsRow">
 ${trabajos.map((t) => `    <figure class="job${t.video ? ' job--video' : ''}">
       ${t.video
         ? `<button class="job__media" data-video="${esc(t.video)}" data-wide aria-label="Ver video: ${esc(t.trabajo)}">
@@ -261,7 +262,8 @@ ${trabajos.map((t) => `    <figure class="job${t.video ? ' job--video' : ''}">
 
 <section class="cases" id="casos">
   <h2 class="h2">${rich(d.clientes.titulo)}</h2>
-  <div class="cases__row">
+  <div class="hs__ctrl" data-for="casesRow"><span class="hs__hint">Deslice para ver más <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg></span><button class="hs__btn" data-dir="-1" aria-label="Ver anteriores"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 6-6 6 6 6"/></svg></button><button class="hs__btn" data-dir="1" aria-label="Ver más"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></svg></button></div>
+  <div class="cases__row hs-row" id="casesRow">
 ${d.clientes.lista.map((c) => `    <figure class="case">
       <button class="case__media"${c.video ? ` data-video="${esc(c.video)}"` : ''} aria-label="${c.video ? 'Ver video de ' : ''}${esc(c.nombre)}">
         <img loading="lazy" src="${esc(c.portada)}" alt="" width="540" height="960">

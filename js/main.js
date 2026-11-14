@@ -1,5 +1,6 @@
 /* Rodriguez IT Solutions · interacciones */
 (() => {
+  document.documentElement.classList.add('js');
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -273,6 +274,41 @@
     if (reduce || !('IntersectionObserver' in window)) marca.classList.add('is-in');
     else new IntersectionObserver((ents, o) => ents.forEach((e) => { if (e.isIntersecting) { marca.classList.add('is-in'); o.disconnect(); } }), { threshold: 0.25 }).observe(marca);
   }
+
+  /* ---------- Filas que se deslizan: botones, aviso y entrada desde la derecha ---------- */
+  $$('.hs-row').forEach((row) => {
+    const ctrl = document.querySelector(`.hs__ctrl[data-for="${row.id}"]`);
+    [...row.children].forEach((c, k) => c.style.setProperty('--k', Math.min(k, 6)));
+    const paso = () => (row.firstElementChild ? row.firstElementChild.getBoundingClientRect().width + 20 : 300);
+    const estado = () => {
+      const fin = row.scrollLeft + row.clientWidth >= row.scrollWidth - 8;
+      row.classList.toggle('at-end', fin);
+      if (ctrl) {
+        ctrl.querySelector('[data-dir="-1"]').disabled = row.scrollLeft < 8;
+        ctrl.querySelector('[data-dir="1"]').disabled = fin;
+      }
+    };
+    if (ctrl) ctrl.querySelectorAll('.hs__btn').forEach((b) => b.addEventListener('click', () => {
+      row.scrollBy({ left: paso() * +b.dataset.dir, behavior: reduce ? 'auto' : 'smooth' });
+    }));
+    let usado = false, auto = false;
+    row.addEventListener('scroll', () => {
+      estado();
+      if (!usado && !auto && row.scrollLeft > 30) { usado = true; ctrl && ctrl.classList.add('is-used'); }
+    }, { passive: true });
+    addEventListener('resize', estado);
+    estado();
+    // Al aparecer: tarjetas entran desde la derecha y la fila "se asoma" para invitar a deslizar
+    const io = new IntersectionObserver((ents, o) => ents.forEach((e) => {
+      if (!e.isIntersecting) return;
+      row.classList.add('is-in'); o.disconnect();
+      if (reduce || row.scrollWidth <= row.clientWidth + 8) return;
+      setTimeout(() => { if (!usado) { auto = true; row.scrollBy({ left: 110, behavior: 'smooth' }); } }, 1100);
+      setTimeout(() => { if (auto) row.scrollTo({ left: 0, behavior: 'smooth' }); }, 1900);
+      setTimeout(() => { auto = false; }, 2700);
+    }), { threshold: 0.35 });
+    io.observe(row);
+  });
 
   /* ---------- Botón flotante de WhatsApp ---------- */
   const waF = $('#waFloat');

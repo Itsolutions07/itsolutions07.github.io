@@ -386,8 +386,8 @@
     ]
   },
   "entregados": {
-    "titulo": "Sistemas *entregados.*",
-    "descripcion": "Son catálogos reales de nuestros clientes. Entre y véalos funcionando.",
+    "titulo": "Sistemas de catálogo *entregados.*",
+    "descripcion": "Catálogos web reales de nuestros clientes, funcionando. Entre y véalos en acción.",
     "lista": [
       {
         "nombre": "Lovesita",
@@ -412,7 +412,6 @@
     "texto": "Rodriguez IT Solutions es un emprendimiento hondureño fundado por un Ingeniero en Sistemas. Quien programa su sistema es quien lo instala, le enseña a usarlo y le atiende cuando necesita ayuda.",
     "puntos": [
       "Ingeniero en Sistemas detrás de cada proyecto",
-      "Programado en Honduras y en español",
       "Trato directo, sin intermediarios",
       "Cambios a la medida de su negocio"
     ],
