@@ -369,7 +369,7 @@ ${d.contacto.boton_flotante !== false ? `<a class="wa-float" id="waFloat" href="
       </ul>
     </div>
   </div>
-  <div class="foot__glow"><p class="foot__word" aria-hidden="true">RODRIGUEZ&nbsp;IT</p></div>
+  <div class="foot__glow"><p class="foot__word" aria-hidden="true"><span style="--i:0">R</span><span style="--i:1">O</span><span style="--i:2">D</span><span style="--i:3">R</span><span style="--i:4">I</span><span style="--i:5">G</span><span style="--i:6">U</span><span style="--i:7">E</span><span style="--i:8">Z</span><span class="sp"> </span><span class="it" style="--i:10">I</span><span class="it" style="--i:11">T</span></p></div>
   <p class="foot__legal">© ${esc(d.general.anio)} Rodriguez IT Solutions · DRC System</p>
 </footer>
 
