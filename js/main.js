@@ -267,6 +267,13 @@
     marcar();
   }
 
+  /* ---------- Marca grande del pie: aparece al llegar ---------- */
+  const marca = $('.foot__word');
+  if (marca) {
+    if (reduce || !('IntersectionObserver' in window)) marca.classList.add('is-in');
+    else new IntersectionObserver((ents, o) => ents.forEach((e) => { if (e.isIntersecting) { marca.classList.add('is-in'); o.disconnect(); } }), { threshold: 0.25 }).observe(marca);
+  }
+
   /* ---------- Botón flotante de WhatsApp ---------- */
   const waF = $('#waFloat');
   if (waF) {

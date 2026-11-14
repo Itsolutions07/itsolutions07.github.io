@@ -369,7 +369,7 @@ ${d.contacto.boton_flotante !== false ? `<a class="wa-float" id="waFloat" href="
       </ul>
     </div>
   </div>
-  <p class="foot__word" aria-hidden="true">RODRIGUEZ&nbsp;IT</p>
+  <div class="foot__glow"><p class="foot__word" aria-hidden="true">RODRIGUEZ&nbsp;IT</p></div>
   <p class="foot__legal">© ${esc(d.general.anio)} Rodriguez IT Solutions · DRC System</p>
 </footer>
 
