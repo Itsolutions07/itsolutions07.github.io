@@ -13,7 +13,7 @@ Panel para editar: https://app.pagescms.org (iniciar sesión con GitHub)
 - [ ] **Nombre en "Quién está detrás"** (opcional): agregarlo en el panel si lo quiere mostrar.
 - [ ] **Entrar al panel** una vez para confirmar que puede editar.
 - [ ] **Dominio propio** cuando sea posible (se conecta sin rehacer nada).
-- [ ] **Volantes nuevos** con el número correcto (3318-0857) y el enlace de la página. Los viejos tienen 9439-7031 / 9794-3213.
+- [ ] **Publicar los volantes nuevos** en Instagram/Facebook: "Servicios a distancia 2026" y "Servicios a domicilio 2026" (carpeta Publicidad). Los viejos tienen 9439-7031 / 9794-3213.
 
 ## Lo que puedo hacer yo cuando me diga
 

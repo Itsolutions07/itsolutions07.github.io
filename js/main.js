@@ -133,7 +133,8 @@
       stage.style.setProperty('--p', p.toFixed(3));
     } else stage.style.setProperty('--p', 1);
 
-    // Productos: escena según el avance
+    // Productos: escena según el avance (solo en pantallas grandes; en celular son bloques normales)
+    if (innerWidth > 900) {
     const sp = progress(seq);
     const idx = Math.min(scenes.length - 1, Math.floor(sp * scenes.length * 0.999));
     setScene(idx);
@@ -142,6 +143,7 @@
       const local = clamp(sp * scenes.length - idx);
       const lit = Math.floor(local * (words.length + 0.5));
       words.forEach((w, k) => w.classList.toggle('is-lit', k < lit));
+    }
     }
 
     // Mantenimiento: cambia la foto según el servicio
@@ -272,6 +274,48 @@
     if (reduce || !('IntersectionObserver' in window)) marca.classList.add('is-in');
     else new IntersectionObserver((ents, o) => ents.forEach((e) => { if (e.isIntersecting) { marca.classList.add('is-in'); o.disconnect(); } }), { threshold: 0.25 }).observe(marca);
   }
+
+  /* ---------- Productos en celular: cada bloque aparece al llegar ---------- */
+  if (innerWidth <= 900) {
+    const sio = new IntersectionObserver((ents) => ents.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('is-active'); sio.unobserve(e.target); }
+    }), { threshold: 0.15 });
+    scenes.forEach((s) => { s.classList.remove('is-leaving'); sio.observe(s); });
+  }
+
+  /* ---------- Botón Atrás del teléfono: regresa a la sección anterior ---------- */
+  (() => {
+    const ids = ['inicio', 'productos', 'pruebe', 'antes', 'mantenimiento', 'trabajos', 'casos', 'entregados', 'nosotros', 'preguntas', 'contacto'];
+    const secs2 = ids.map((id) => document.getElementById(id)).filter(Boolean);
+    if (!secs2.length || !('pushState' in history)) return;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    let actual = location.hash.slice(1) || 'inicio';
+    history.replaceState({ sec: actual }, '', location.hash || location.pathname + location.search);
+    let bloqueo = 0, espera;
+    const enVista = () => {
+      const y = innerHeight * 0.4; let cur = secs2[0];
+      for (const s of secs2) if (s.getBoundingClientRect().top <= y) cur = s;
+      return cur.id;
+    };
+    addEventListener('scroll', () => {
+      clearTimeout(espera);
+      espera = setTimeout(() => {
+        if (Date.now() < bloqueo) return;
+        const id = enVista();
+        if (id !== actual) {
+          actual = id;
+          history.pushState({ sec: id }, '', id === 'inicio' ? location.pathname + location.search : '#' + id);
+        }
+      }, 700);
+    }, { passive: true });
+    addEventListener('popstate', (e) => {
+      const id = (e.state && e.state.sec) || location.hash.slice(1) || 'inicio';
+      const el = document.getElementById(id);
+      if (!el) return;
+      actual = id; bloqueo = Date.now() + 1500;
+      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+    });
+  })();
 
   /* ---------- Filas que se deslizan: botones, aviso y entrada desde la derecha ---------- */
   $$('.hs-row').forEach((row) => {

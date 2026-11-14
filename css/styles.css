@@ -438,8 +438,26 @@ html { scrollbar-color: #2A3563 var(--night); }
   .scene__art--duo .phone--mini { width: 30%; bottom: -16%; }
   .scene__art--words span { font-size: clamp(2rem, 10vw, 3.4rem); }
 }
-@media (max-width: 900px) and (max-height: 760px) {
-  .scene__list { display: none; }
+/* Celular: sin secuencia fijada (evita temblores al mostrarse/ocultarse la barra del navegador) */
+@media (max-width: 900px) {
+  .seq { height: auto !important; }
+  .seq__sticky { position: relative; height: auto; overflow: visible; isolation: auto; }
+  .seq__bg, .seq__count, .seq__bar { display: none; }
+  .scene {
+    position: relative; inset: auto; pointer-events: auto;
+    padding: 64px var(--gutter) 72px; max-width: none;
+    background: radial-gradient(120% 80% at 75% 30%, transparent 30%, rgba(0,0,0,.4) 100%), var(--sbg, #0B2A8F);
+  }
+  .scene::before {
+    content: attr(data-num); display: block; margin-bottom: 14px;
+    font-family: var(--f-display); font-weight: 600; font-size: 1rem; letter-spacing: .02em; color: rgba(255,255,255,.65);
+  }
+  /* Entrada suave: solo opacidad y desplazamiento (sin desenfoque) */
+  .scene__text > *, .scene__art { filter: none !important; }
+  .scene__text > * { transform: translateY(18px); transition: opacity 500ms var(--ease-out), transform 600ms var(--ease-out); }
+  .scene__art { transform: translateY(24px); transition: opacity 600ms var(--ease-out), transform 700ms var(--ease-out); }
+  .scene.is-leaving .scene__text > *, .scene.is-leaving .scene__art { transform: none; }
+  .scene__art--words span { color: var(--accent); }
 }
 
 /* ==========================================================

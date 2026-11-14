@@ -157,7 +157,7 @@ export function render(d) {
     <div class="seq__count" aria-hidden="true"><span class="seq__num" id="seqNum">01</span><span class="seq__of">/ ${pad(n)}</span></div>
     <div class="seq__bar" aria-hidden="true"><span id="seqBar"></span></div>
 ${d.productos.map((p, i) => `
-    <article class="scene${i === 0 ? ' is-active' : ''}" data-bg="${esc(p.color_fondo)}" data-accent="${esc(p.color_acento)}">
+    <article class="scene${i === 0 ? ' is-active' : ''}" data-bg="${esc(p.color_fondo)}" data-accent="${esc(p.color_acento)}" data-num="${pad(i + 1)} / ${pad(n)}" style="--sbg:${esc(p.color_fondo)}">
       <div class="scene__text">
         <h2 class="scene__name">${esc(p.nombre)}</h2>
         <p class="scene__claim">${rich(p.frase)}</p>
