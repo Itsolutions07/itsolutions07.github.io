@@ -589,6 +589,15 @@ html { scrollbar-color: #2A3563 var(--night); }
 .faq__item summary:hover { color: var(--sky); }
 .faq__item p { margin: -6px 0 24px; color: var(--muted); max-width: 64ch; }
 
+/* ---------- Redes sociales ---------- */
+.social { list-style: none; padding: 0; margin: 0; display: flex; gap: 12px; }
+.social a { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); color: var(--ink); transition: background-color 200ms var(--ease-out), border-color 200ms, transform 200ms var(--ease-out); }
+.social a:hover { background: rgba(255,255,255,.06); border-color: rgba(167,176,204,.45); }
+.social a:active { transform: scale(.95); }
+.social svg { width: 21px; height: 21px; }
+.social--close { justify-content: center; margin-top: 4px; }
+.social--foot { max-width: var(--maxw); margin: 28px auto 0; }
+
 /* ---------- Botón flotante de WhatsApp ---------- */
 .wa-float {
   position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 40;

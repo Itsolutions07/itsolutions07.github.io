@@ -43,6 +43,9 @@ export function render(d) {
 
   const cinta = d.cinta.map((c) => `<span>${esc(c)}</span><i></i>`).join('');
   const trabajos = d.trabajos?.lista || [];
+  const redes = [['instagram', 'Instagram', '#i-ig'], ['facebook', 'Facebook', '#i-fb'], ['tiktok', 'TikTok', '#i-tt']]
+    .filter(([k]) => d.contacto[k]).map(([k, n, i]) => ({ url: d.contacto[k], n, i }));
+  const redesHTML = (cls) => redes.length ? `<ul class="social ${cls}">${redes.map((r) => `<li><a href="${esc(r.url)}" ${ext()} aria-label="${r.n}"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="${r.i}"/></svg></a></li>`).join('')}</ul>` : '';
   const dt = d.detras;
   const testimonios = (d.testimonios?.lista || []).filter((t) => t.texto && t.nombre);
   const preguntas = (d.preguntas?.lista || []).filter((q) => q.pregunta && q.respuesta);
@@ -95,6 +98,7 @@ export function render(d) {
     <span>Rodriguez <em>IT</em> Solutions</span>
   </a>
   <nav class="nav__links" id="navLinks" aria-label="Secciones">
+    <a href="#inicio">Inicio</a>
     <a href="#productos">Productos</a>
     <a href="#pruebe">Su negocio</a>
     <a href="#mantenimiento">Mantenimiento</a>
@@ -308,6 +312,7 @@ ${preguntas.map((q) => `    <details class="faq__item">
   <h2 class="close__title">${rich(d.cierre.titulo)}</h2>
   <p class="lede">${rich(d.cierre.descripcion)}</p>
   <a class="btn btn--xl" href="${esc(wa(d.cierre.mensaje_whatsapp))}" ${ext()}>${ICON_WA} ${esc(d.contacto.whatsapp_visible)}</a>
+  ${redesHTML('social--close')}
 </section>
 
 </main>
@@ -322,12 +327,13 @@ ${d.contacto.boton_flotante !== false ? `<a class="wa-float" id="waFloat" href="
     </div>
     <ul class="foot__links">
       <li><a href="${esc(wa())}" ${ext()}>WhatsApp</a></li>
-      <li><a href="${esc(d.contacto.instagram)}" ${ext()}>Instagram</a></li>
+      <li><a href="#inicio">Inicio</a></li>
       <li><a href="#productos">Productos</a></li>
       <li><a href="#mantenimiento">Mantenimiento</a></li>
       ${preguntas.length ? '<li><a href="#preguntas">Preguntas</a></li>' : ''}
     </ul>
   </div>
+  ${redesHTML('social--foot')}
   <p class="foot__word" aria-hidden="true">RODRIGUEZ&nbsp;IT</p>
   <p class="foot__legal">© ${esc(d.general.anio)} Rodriguez IT Solutions</p>
 </footer>
@@ -342,6 +348,9 @@ ${d.contacto.boton_flotante !== false ? `<a class="wa-float" id="waFloat" href="
   <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m-6-6 6 6 6-6"/></symbol>
   <symbol id="i-lr" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 6-6 6 6 6M15 6l6 6-6 6"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/></g><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8.1v3h2.5V21h2.9Z"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 3h-3v12.2a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.6a5.7 5.7 0 1 0 4.8 5.6V9.1a7.2 7.2 0 0 0 4.2 1.3V7.4a4.2 4.2 0 0 1-4.2-4.4Z"/></symbol>
   <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
 </svg>
 

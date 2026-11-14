@@ -2,7 +2,7 @@
   "general": {
     "titulo_pestana": "Rodriguez IT Solutions · DRC System",
     "descripcion_google": "Facturación con CAI, inventario, contabilidad, catálogo web, apps a la medida y mantenimiento de computadoras. Rodriguez IT Solutions, Honduras.",
-    "titulo_al_compartir": "Rodriguez IT Solutions · Sistemas para su negocio",
+    "titulo_al_compartir": "Rodriguez IT Solutions - Sistemas para su negocio - DRC System",
     "texto_pie": "DRC System es un producto de Rodriguez IT Solutions.",
     "hecho_en": "Hecho en Honduras.",
     "anio": "2026"
@@ -12,7 +12,9 @@
     "whatsapp_visible": "+504 3318-0857",
     "instagram": "https://www.instagram.com/itsolutions.rodriguez/",
     "mensaje_general": "Hola, quiero información de Rodriguez IT Solutions",
-    "boton_flotante": true
+    "boton_flotante": true,
+    "facebook": "",
+    "tiktok": ""
   },
   "portada": {
     "pregunta_inicio": "¿Vende",
@@ -160,7 +162,7 @@
     {
       "boton": "Comida",
       "palabra": "comida",
-      "negocio": "Baleadas Doña Mary",
+      "negocio": "Sabores Doña Mary",
       "frase": "un negocio de comida",
       "img_venta": "/assets/img/giros/baleadas-venta.webp",
       "img_inventario": "/assets/img/giros/baleadas-inv.webp",
@@ -196,7 +198,7 @@
     {
       "boton": "Repostería",
       "palabra": "repostería",
-      "negocio": "Panadería La Espiga",
+      "negocio": "Repostería La Espiga",
       "frase": "una repostería",
       "img_venta": "/assets/img/giros/pan-venta.webp",
       "img_inventario": "/assets/img/giros/pan-inv.webp",
@@ -205,7 +207,7 @@
     {
       "boton": "Belleza",
       "palabra": "cosméticos",
-      "negocio": "Nails & Beauty",
+      "negocio": "Glamour Studio",
       "frase": "un salón de belleza",
       "img_venta": "/assets/img/giros/unas-venta.webp",
       "img_inventario": "/assets/img/giros/unas-inv.webp",

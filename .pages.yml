@@ -36,6 +36,8 @@ content:
             description: "Ejemplo: 50433180857. Todos los botones de la página usan este número."
           - { name: whatsapp_visible, label: Número como se muestra, type: string, description: "Ejemplo: +504 3318-0857" }
           - { name: instagram, label: Enlace de Instagram, type: string }
+          - { name: facebook, label: Enlace de Facebook (opcional), type: string }
+          - { name: tiktok, label: Enlace de TikTok (opcional), type: string, description: "Las redes que deje vacías no se muestran." }
           - { name: mensaje_general, label: Mensaje del botón "Escríbanos", type: string }
           - { name: boton_flotante, label: Mostrar botón verde de WhatsApp flotante, type: boolean }
 
