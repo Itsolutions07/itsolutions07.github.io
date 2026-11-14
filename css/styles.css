@@ -40,7 +40,7 @@ body {
 img, svg, video { display: block; max-width: 100%; }
 
 /* Fondo en movimiento (detrás de todo el contenido) */
-body::before, body::after { content: ""; position: fixed; pointer-events: none; z-index: -5; }
+body::before, body::after, html::after { content: ""; position: fixed; pointer-events: none; z-index: -5; }
 body::before {
   inset: -25%;
   background:
@@ -54,7 +54,16 @@ body::after {
   background: linear-gradient(100deg, transparent 0%, rgba(157, 180, 255, .07) 45%, rgba(157, 180, 255, .11) 50%, rgba(157, 180, 255, .07) 55%, transparent 100%);
   filter: blur(18px);
   transform: translate3d(-70vw, 0, 0) rotate(12deg);
-  animation: fondoFranja 16s cubic-bezier(.45, 0, .55, 1) infinite;
+  animation: fondoFranja 9s cubic-bezier(.45, 0, .55, 1) infinite;
+}
+/* Segunda franja, más ancha y suave, a medio camino de la primera: siempre hay luz cruzando */
+html::after {
+  top: -50%; bottom: -50%; left: 0; width: 80vw;
+  background: linear-gradient(100deg, transparent 0%, rgba(124, 150, 255, .05) 42%, rgba(157, 180, 255, .08) 50%, rgba(124, 150, 255, .05) 58%, transparent 100%);
+  filter: blur(24px);
+  transform: translate3d(-90vw, 0, 0) rotate(-8deg);
+  animation: fondoFranja2 13s cubic-bezier(.45, 0, .55, 1) infinite;
+  animation-delay: -6s;
 }
 @keyframes fondoLuces {
   0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
@@ -62,11 +71,14 @@ body::after {
   100% { transform: translate3d(-4%, 3%, 0) rotate(-5deg) scale(1.02); }
 }
 @keyframes fondoFranja {
-  0%   { transform: translate3d(-70vw, 0, 0) rotate(12deg); }
-  70%  { transform: translate3d(140vw, 0, 0) rotate(12deg); }
-  100% { transform: translate3d(140vw, 0, 0) rotate(12deg); }
+  from { transform: translate3d(-70vw, 0, 0) rotate(12deg); }
+  to   { transform: translate3d(140vw, 0, 0) rotate(12deg); }
 }
-@media (prefers-reduced-motion: reduce) { body::before, body::after { animation: none; } body::after { display: none; } }
+@keyframes fondoFranja2 {
+  from { transform: translate3d(140vw, 0, 0) rotate(-8deg); }
+  to   { transform: translate3d(-90vw, 0, 0) rotate(-8deg); }
+}
+@media (prefers-reduced-motion: reduce) { body::before, body::after, html::after { animation: none; } body::after, html::after { display: none; } }
 a { color: inherit; text-underline-offset: .2em; }
 button { font: inherit; color: inherit; }
 em { font-family: var(--f-serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
