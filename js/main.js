@@ -78,6 +78,7 @@
 
   /* ---------- Bucle de scroll ---------- */
   const stage = $('#stage');
+  const heroBg = $('#heroBg');
   const seq = $('#productos');
   const scenes = $$('.scene', seq);
   const seqBg = $('#seqBg');
@@ -122,6 +123,9 @@
         mqTrack.style.setProperty('--mq', (((innerHeight - mr.top) * 0.6) % half).toFixed(1));
       }
     }
+
+    // Portada: la foto de fondo baja más despacio que la página (efecto de profundidad)
+    if (heroBg && !reduce && scrollY < innerHeight * 1.3) heroBg.style.setProperty('--hy', (scrollY * 0.35).toFixed(1) + 'px');
 
     // Portada: la laptop se "abre" hacia el espectador
     if (!reduce) {

@@ -53,6 +53,7 @@ content:
           - { name: mensaje_boton_principal, label: Mensaje de WhatsApp del botón azul, type: string }
           - { name: boton_secundario, label: Texto del segundo botón, type: string }
           - { name: texto_debajo, label: Texto junto al nombre del negocio de ejemplo, type: string }
+          - { name: imagen_fondo, label: Foto de fondo de la portada (opcional), type: image, options: { path: subidas }, description: "Se oscurece sola para que el texto se lea. Use una foto horizontal." }
 
       - name: cinta
         label: Cinta de giros (palabras que se desplazan)

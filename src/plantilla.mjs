@@ -117,6 +117,7 @@ export function render(d) {
 <main>
 
 <section class="hero" id="inicio">
+  ${d.portada.imagen_fondo ? `<div class="hero__bg" id="heroBg" aria-hidden="true"><img src="${esc(d.portada.imagen_fondo)}" alt="" width="1280" height="960" fetchpriority="high" decoding="async"></div>` : ''}
   <div class="hero__glow" aria-hidden="true"></div>
   <h1 class="hero__title">
     <span class="hero__line">${esc(d.portada.pregunta_inicio)} <span class="rot" id="rot" aria-live="polite"><span class="rot__word is-in">${esc(g0.palabra)}</span></span>?</span>

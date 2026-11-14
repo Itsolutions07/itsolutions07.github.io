@@ -23,7 +23,8 @@
     "boton_principal": "Pedir una demostración",
     "mensaje_boton_principal": "Hola, quiero ver una demostración de DRC System",
     "boton_secundario": "Ver los productos",
-    "texto_debajo": "su sistema y su catálogo"
+    "texto_debajo": "su sistema y su catálogo",
+    "imagen_fondo": "/assets/img/portada-fondo.webp"
   },
   "cinta": [
     "Comida",
