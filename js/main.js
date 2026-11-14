@@ -251,6 +251,22 @@
     jobVids.forEach((v) => vio.observe(v));
   }
 
+  /* ---------- Menú: marcar la sección que se está viendo ---------- */
+  const navAs = $$('#navLinks a[href^="#"]');
+  const secs = navAs.map((a) => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  if (secs.length) {
+    const marcar = () => {
+      const y = innerHeight * 0.35;
+      let cur = secs[0];
+      for (const s of secs) if (s.getBoundingClientRect().top <= y) cur = s;
+      navAs.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === '#' + cur.id));
+    };
+    let t2 = false;
+    addEventListener('scroll', () => { if (!t2) { t2 = true; setTimeout(() => { marcar(); t2 = false; }, 120); } }, { passive: true });
+    addEventListener('resize', marcar);
+    marcar();
+  }
+
   /* ---------- Botón flotante de WhatsApp ---------- */
   const waF = $('#waFloat');
   if (waF) {

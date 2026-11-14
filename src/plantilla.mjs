@@ -117,7 +117,7 @@ export function render(d) {
 <main>
 
 <section class="hero" id="inicio">
-  ${d.portada.imagen_fondo ? `<div class="hero__bg" id="heroBg" aria-hidden="true"><img src="${esc(d.portada.imagen_fondo)}" alt="" width="1280" height="960" fetchpriority="high" decoding="async"></div>` : ''}
+  ${d.portada.imagen_fondo ? `<div class="hero__bg" id="heroBg" aria-hidden="true"><img class="hero__bg-blur" src="${esc(d.portada.imagen_fondo)}" alt="" width="1280" height="960" decoding="async"><div class="hero__bg-frame"><img class="hero__bg-photo" src="${esc(d.portada.imagen_fondo)}" alt="" width="1280" height="960" fetchpriority="high" decoding="async"></div></div>` : ''}
   <div class="hero__glow" aria-hidden="true"></div>
   <h1 class="hero__title">
     <span class="hero__line">${esc(d.portada.pregunta_inicio)} <span class="rot" id="rot" aria-live="polite"><span class="rot__word is-in">${esc(g0.palabra)}</span></span>?</span>
@@ -304,7 +304,7 @@ ${dt && dt.foto_principal ? `<section class="team" id="nosotros">
     <h2 class="h2">${rich(dt.titulo)}</h2>
     <p class="lede">${rich(dt.texto)}</p>
     ${(dt.puntos || []).length ? `<ul class="team__list">${dt.puntos.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
-    ${dt.nombre ? `<p class="team__sign"><b>${esc(dt.nombre)}</b>${dt.cargo ? `<span>${esc(dt.cargo)}</span>` : ''}</p>` : ''}
+    ${dt.nombre || dt.cargo ? `<p class="team__sign">${dt.nombre ? `<b>${esc(dt.nombre)}</b>` : ''}${dt.cargo ? `<span>${esc(dt.cargo)}</span>` : ''}</p>` : ''}
     <a class="btn" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()}>${ICON_WA} Hablemos</a>
   </div>
 </section>` : ''}
@@ -341,22 +341,36 @@ ${preguntas.map((q) => `    <details class="faq__item">
 ${d.contacto.boton_flotante !== false ? `<a class="wa-float" id="waFloat" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()} aria-label="Escríbanos por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></a>` : ''}
 
 <footer class="foot">
-  <div class="foot__row">
+  <div class="foot__grid">
     <div class="foot__brand">
-      <img src="assets/img/logo-drc.webp" alt="DRC System" width="72" height="80">
-      <p>${esc(d.general.texto_pie)}<br>${esc(d.general.hecho_en)}</p>
+      <a class="foot__logo" href="#inicio">
+        <img src="assets/img/logo-rit.webp" alt="" width="56" height="56">
+        <span><b>Rodriguez <em>IT</em> Solutions</b><small>Ingeniería en Sistemas · Honduras</small></span>
+      </a>
+      <p>${esc(d.general.texto_pie)} ${esc(d.general.hecho_en)}</p>
+      ${redesHTML('social--foot')}
     </div>
-    <ul class="foot__links">
-      <li><a href="${esc(wa())}" ${ext()}>WhatsApp</a></li>
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#productos">Productos</a></li>
-      <li><a href="#mantenimiento">Mantenimiento</a></li>
-      ${preguntas.length ? '<li><a href="#preguntas">Preguntas</a></li>' : ''}
-    </ul>
+    <nav class="foot__col" aria-label="Secciones">
+      <h3>Secciones</h3>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#pruebe">Su negocio</a></li>
+        <li><a href="#mantenimiento">Mantenimiento</a></li>
+        ${entregados.length ? '<li><a href="#entregados">En acción</a></li>' : ''}
+        ${preguntas.length ? '<li><a href="#preguntas">Preguntas</a></li>' : ''}
+      </ul>
+    </nav>
+    <div class="foot__col">
+      <h3>Contacto</h3>
+      <ul>
+        <li><a href="${esc(wa(d.contacto.mensaje_general))}" ${ext()}>WhatsApp ${esc(d.contacto.whatsapp_visible)}</a></li>
+        ${redes.map((r) => `<li><a href="${esc(r.url)}" ${ext()}>${r.n}</a></li>`).join('')}
+      </ul>
+    </div>
   </div>
-  ${redesHTML('social--foot')}
   <p class="foot__word" aria-hidden="true">RODRIGUEZ&nbsp;IT</p>
-  <p class="foot__legal">© ${esc(d.general.anio)} Rodriguez IT Solutions</p>
+  <p class="foot__legal">© ${esc(d.general.anio)} Rodriguez IT Solutions · DRC System</p>
 </footer>
 
 <dialog class="vid" id="vid" aria-label="Video">

@@ -367,7 +367,7 @@
       },
       {
         "nombre": "Lovesita",
-        "descripcion": "Tienda · Sistema y catálogo web",
+        "descripcion": "Tienda · Sistema de catálogo web",
         "portada": "/assets/img/casos/Lovesita_v4.webp",
         "video": "/assets/video/Lovesita_v4.mp4"
       },
@@ -409,8 +409,9 @@
   },
   "detras": {
     "titulo": "Quién está *detrás.*",
-    "texto": "Rodriguez IT Solutions es un emprendimiento hondureño. Quien programa su sistema es quien lo instala, le enseña a usarlo y le atiende cuando necesita ayuda.",
+    "texto": "Rodriguez IT Solutions es un emprendimiento hondureño fundado por un Ingeniero en Sistemas. Quien programa su sistema es quien lo instala, le enseña a usarlo y le atiende cuando necesita ayuda.",
     "puntos": [
+      "Ingeniero en Sistemas detrás de cada proyecto",
       "Programado en Honduras y en español",
       "Trato directo, sin intermediarios",
       "Cambios a la medida de su negocio"
@@ -420,7 +421,7 @@
     "foto_secundaria": "/assets/img/detras/codigo.webp",
     "texto_foto_secundaria": "Los inicios: el inventario de Leonor Boutique.",
     "nombre": "",
-    "cargo": ""
+    "cargo": "Ingeniero en Sistemas · Fundador de Rodriguez IT Solutions"
   },
   "testimonios": {
     "titulo": "Lo que dicen *nuestros clientes.*",
