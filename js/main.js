@@ -122,10 +122,12 @@
   }
   scenes.forEach((s) => s.style.setProperty('--accent', s.dataset.accent));
 
+  let VH = innerHeight, VW = innerWidth;
+  addEventListener('resize', () => { if (innerWidth !== VW) { VW = innerWidth; VH = innerHeight; } });
   function progress(el) {
     const r = el.getBoundingClientRect();
-    const total = r.height - innerHeight;
-    return total > 0 ? clamp(-r.top / total) : 0;
+    const total = r.height - VH;
+    return total > 0 ? clamp(-r.top / total) : 0; // VH estable
   }
 
   function onScroll() {
@@ -147,8 +149,8 @@
       stage.style.setProperty('--p', p.toFixed(3));
     } else stage.style.setProperty('--p', 1);
 
-    // Productos: escena según el avance (solo en pantallas grandes; en celular son bloques normales)
-    if (innerWidth > 900) {
+    // Productos: escena según el avance
+    {
     const sp = progress(seq);
     const idx = Math.min(scenes.length - 1, Math.floor(sp * scenes.length * 0.999));
     setScene(idx);
@@ -225,6 +227,43 @@
     tryV = b.dataset.v;
     renderTry();
   }));
+  // Celular: flechas, contador y deslizar con el dedo sobre las pantallas
+  const chipsBox = $('#chips'), chipsWrap = $('.chips-wrap'), giroCount = $('#giroCount'), tryStage = $('#tryStage');
+  let giroIdx = 0;
+  const irGiro = (i, dir) => {
+    giroIdx = (i + chips.length) % chips.length;
+    const b = chips[giroIdx];
+    b.click();
+    b.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+    if (tryStage && !reduce) {
+      tryStage.classList.remove('go-next', 'go-prev'); void tryStage.offsetWidth;
+      tryStage.classList.add(dir < 0 ? 'go-prev' : 'go-next');
+    }
+  };
+  chips.forEach((b, i) => b.addEventListener('click', () => {
+    if (giroCount) giroCount.textContent = (i + 1) + ' / ' + chips.length;
+    const prev = giroIdx; giroIdx = i;
+    if (tryStage && !reduce && innerWidth <= 900 && prev !== i) {
+      tryStage.classList.remove('go-next', 'go-prev'); void tryStage.offsetWidth;
+      tryStage.classList.add(i < prev ? 'go-prev' : 'go-next');
+    }
+  }));
+  $$('.chips-nav .hs__btn').forEach((b) => b.addEventListener('click', () => irGiro(giroIdx + +b.dataset.g, +b.dataset.g)));
+  if (chipsBox && chipsWrap) {
+    const fin = () => chipsWrap.classList.toggle('at-end', chipsBox.scrollLeft + chipsBox.clientWidth >= chipsBox.scrollWidth - 6);
+    chipsBox.addEventListener('scroll', () => { fin(); $('.chips-nav') && $('.chips-nav').classList.add('is-used'); }, { passive: true });
+    fin();
+  }
+  if (tryStage) {
+    let x0 = null, y0 = null;
+    tryStage.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    tryStage.addEventListener('touchend', (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) irGiro(giroIdx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+      x0 = null;
+    }, { passive: true });
+  }
   // flechas en la lista de giros
   $('#chips').addEventListener('keydown', (e) => {
     if (!['ArrowRight', 'ArrowLeft'].includes(e.key)) return;
@@ -287,20 +326,6 @@
   if (marca) {
     if (reduce || !('IntersectionObserver' in window)) marca.classList.add('is-in');
     else new IntersectionObserver((ents, o) => ents.forEach((e) => { if (e.isIntersecting) { marca.classList.add('is-in'); o.disconnect(); } }), { threshold: 0.25 }).observe(marca);
-  }
-
-  /* ---------- Productos en celular: se deslizan hacia los lados ---------- */
-  if (innerWidth <= 900) {
-    const row = $('#seqRow');
-    scenes.forEach((s) => { s.classList.remove('is-leaving'); s.classList.add('is-active'); });
-    if (row) {
-      row.classList.add('hs-row');
-      const cnt = $('#seqCount');
-      row.addEventListener('scroll', () => {
-        const i = Math.round(row.scrollLeft / row.clientWidth);
-        if (cnt) cnt.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(scenes.length).padStart(2, '0');
-      }, { passive: true });
-    }
   }
 
   /* ---------- Cierre: la línea de luz se dibuja al llegar ---------- */

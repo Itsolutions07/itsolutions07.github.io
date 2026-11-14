@@ -152,8 +152,7 @@ export function render(d) {
 </div>
 
 <section class="seq" id="productos" aria-label="Productos" style="height:${Math.max(2, n) * 106 + 4}vh">
-  <div class="hs__ctrl hs__ctrl--seq" data-for="seqRow"><span class="hs__hint">Deslice para ver más <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg></span><span class="hs__count" id="seqCount">01 / ${pad(n)}</span><button class="hs__btn" data-dir="-1" aria-label="Producto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 6-6 6 6 6"/></svg></button><button class="hs__btn" data-dir="1" aria-label="Siguiente producto"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></svg></button></div>
-  <div class="seq__sticky" id="seqRow">
+  <div class="seq__sticky">
     <div class="seq__bg" id="seqBg" aria-hidden="true"></div>
     <div class="seq__count" aria-hidden="true"><span class="seq__num" id="seqNum">01</span><span class="seq__of">/ ${pad(n)}</span></div>
     <div class="seq__bar" aria-hidden="true"><span id="seqBar"></span></div>
@@ -175,10 +174,13 @@ ${d.productos.map((p, i) => `
     <h2 class="h2">${rich(d.pruebe.titulo)}</h2>
     <p class="lede">${rich(d.pruebe.descripcion)}</p>
   </div>
+  <div class="chips-nav"><span class="hs__hint">Deslice para ver más <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg></span><span class="hs__count" id="giroCount">1 / ${d.giros.length}</span><button class="hs__btn" data-g="-1" aria-label="Giro anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 6-6 6 6 6"/></svg></button><button class="hs__btn" data-g="1" aria-label="Siguiente giro"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></svg></button></div>
+  <div class="chips-wrap">
   <div class="chips" role="tablist" aria-label="Tipo de negocio" id="chips">
     ${d.giros.map((g, i) => `<button role="tab" aria-selected="${i === 0}" data-i="${i}">${esc(g.boton)}</button>`).join('\n    ')}
   </div>
-  <div class="try__stage">
+  </div>
+  <div class="try__stage" id="tryStage">
     <div class="try__desk">
       <div class="seg" role="group" aria-label="Pantalla">
         <button class="is-on" data-v="venta" aria-pressed="true">Venta</button>
@@ -242,7 +244,7 @@ ${d.productos.map((p, i) => `
   </div>
 </section>
 
-${trabajos.length ? `<section class="jobs bgword" id="trabajos" data-bgword="REPARACIONES">
+${trabajos.length ? `<section class="jobs" id="trabajos">
   <div class="jobs__head">
     <h2 class="h2">${rich(d.trabajos.titulo)}</h2>
     <p class="lede">${rich(d.trabajos.descripcion)}</p>
@@ -275,7 +277,7 @@ ${d.clientes.lista.map((c) => `    <figure class="case">
   </div>
 </section>
 
-${entregados.length ? `<section class="live bgword" id="entregados" data-bgword="EN ACCIÓN">
+${entregados.length ? `<section class="live" id="entregados">
   <div class="live__head">
     <h2 class="h2">${rich(d.entregados.titulo)}</h2>
     <p class="lede">${rich(d.entregados.descripcion)}</p>
@@ -292,12 +294,8 @@ ${entregados.map((e) => `    <a class="link-card" href="${esc(e.enlace)}" ${ext(
   </div>
 </section>` : ''}
 
-${dt && dt.foto_principal ? `<section class="team bgword" id="nosotros" data-bgword="INGENIERÍA">
+${dt && dt.foto_principal ? `<section class="team" id="nosotros">
   <div class="team__media">
-    <div class="seal" aria-hidden="true">
-      <svg viewBox="0 0 200 200"><defs><path id="sealPath" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#sealPath" textLength="500">INGENIERÍA EN SISTEMAS · RODRIGUEZ IT SOLUTIONS ·</textPath></text></svg>
-      <img src="assets/img/logo-rit.webp" alt="" width="80" height="80">
-    </div>
     <figure class="team__main">
       <img loading="lazy" src="${esc(dt.foto_principal)}" alt="${esc(dt.texto_foto_principal || 'Lugar de trabajo de Rodriguez IT Solutions')}" width="1280" height="960">
       ${dt.texto_foto_principal ? `<figcaption>${esc(dt.texto_foto_principal)}</figcaption>` : ''}
@@ -326,7 +324,7 @@ ${testimonios.map((t) => `    <figure class="quote">
   </div>
 </section>` : ''}
 
-${preguntas.length ? `<section class="faq bgword" id="preguntas" data-bgword="PREGUNTAS">
+${preguntas.length ? `<section class="faq" id="preguntas">
   <h2 class="h2">${rich(d.preguntas.titulo)}</h2>
   <div class="faq__list">
 ${preguntas.map((q) => `    <details class="faq__item">
