@@ -85,7 +85,7 @@
   const seqBar = $('#seqBar');
   const words = $$('.scene__art--words span');
   const fix = $('#mantenimiento');
-  const parts = $$('.xpl__part');
+  const parts = $$('.fix__photos img');
   const fixItems = $$('#fixList li');
   let activeScene = -1;
   let activeFix = -1;
@@ -141,19 +141,15 @@
       words.forEach((w, k) => w.classList.toggle('is-lit', k < lit));
     }
 
-    // Mantenimiento: despiece
-    if (innerWidth > 900) {
+    // Mantenimiento: cambia la foto según el servicio
+    if (innerWidth > 900 && fixItems.length) {
       const fp = progress(fix);
-      const x = Math.sin(clamp(fp * 1.25) * Math.PI); // se abre y vuelve a cerrar
-      parts.forEach((pt) => pt.style.setProperty('--x', x.toFixed(3)));
       const fi = Math.min(fixItems.length - 1, Math.floor(fp * fixItems.length * 0.999));
       if (fi !== activeFix) {
         fixItems.forEach((li, k) => li.classList.toggle('is-on', k === fi));
         parts.forEach((pt) => pt.classList.toggle('is-on', pt.dataset.k === fixItems[fi].dataset.p));
         activeFix = fi;
       }
-      $('#xpl').style.setProperty('--os', (fi >= 2 ? 1 : 0.2));
-      $('#xpl').style.setProperty('--clean', fi >= 3 ? 1 : 0);
     }
   }
   let ticking = false;
@@ -162,9 +158,8 @@
   addEventListener('resize', req);
   onScroll();
 
-  // En celular, el despiece se activa por punto en lugar de scroll fijado
+  // En celular, la foto cambia por punto en lugar de scroll fijado
   if (innerWidth <= 900) {
-    parts.forEach((pt) => pt.style.setProperty('--x', 1));
     const io = new IntersectionObserver((ents) => ents.forEach((e) => {
       if (e.isIntersecting) {
         const k = e.target.dataset.p;
@@ -173,8 +168,6 @@
       }
     }), { rootMargin: '-45% 0px -45% 0px' });
     fixItems.forEach((li) => io.observe(li));
-    $('#xpl').style.setProperty('--os', 1);
-    $('#xpl').style.setProperty('--clean', 1);
   }
 
   /* ---------- Pruebe con su negocio ---------- */
@@ -230,7 +223,8 @@
   /* ---------- Videos de clientes ---------- */
   const dlg = $('#vid');
   const vEl = $('#vidEl');
-  $$('.case__media').forEach((b) => b.addEventListener('click', () => {
+  $$('.case__media, .job__media[data-video]').forEach((b) => b.addEventListener('click', () => {
+    dlg.classList.toggle('vid--wide', b.hasAttribute('data-wide'));
     vEl.src = b.dataset.video;
     dlg.showModal();
     vEl.play().catch(() => {});
@@ -239,4 +233,31 @@
   $('.vid__close').addEventListener('click', closeVid);
   dlg.addEventListener('click', (e) => { if (e.target === dlg) closeVid(); });
   dlg.addEventListener('cancel', () => { vEl.pause(); });
+
+  /* ---------- Trabajos: los videos se reproducen solos (sin sonido) al verse ---------- */
+  const jobVids = $$('.job video');
+  if (jobVids.length && !reduce) {
+    const vio = new IntersectionObserver((ents) => ents.forEach((e) => {
+      const v = e.target;
+      if (e.isIntersecting) {
+        if (!v.src) v.src = v.dataset.src;
+        v.play().catch(() => {});
+      } else v.pause();
+    }), { threshold: 0.5 });
+    jobVids.forEach((v) => vio.observe(v));
+  }
+
+  /* ---------- Botón flotante de WhatsApp ---------- */
+  const waF = $('#waFloat');
+  if (waF) {
+    const hero = $('#inicio');
+    const cierre = $('#contacto');
+    const vis = { hero: true, cierre: false };
+    const upd = () => waF.classList.toggle('is-on', !vis.hero && !vis.cierre);
+    const fio = new IntersectionObserver((ents) => ents.forEach((e) => {
+      vis[e.target === hero ? 'hero' : 'cierre'] = e.isIntersecting; upd();
+    }));
+    if (hero) fio.observe(hero);
+    if (cierre) fio.observe(cierre);
+  }
 })();

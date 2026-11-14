@@ -11,7 +11,8 @@
     "whatsapp": "50433180857",
     "whatsapp_visible": "+504 3318-0857",
     "instagram": "https://www.instagram.com/itsolutions.rodriguez/",
-    "mensaje_general": "Hola, quiero información de Rodriguez IT Solutions"
+    "mensaje_general": "Hola, quiero información de Rodriguez IT Solutions",
+    "boton_flotante": true
   },
   "portada": {
     "pregunta_inicio": "¿Vende",
@@ -238,23 +239,27 @@
   },
   "mantenimiento": {
     "titulo": "Su computadora, *como nueva.*",
-    "descripcion": "Además de los sistemas, le damos mantenimiento a su equipo.",
+    "descripcion": "Además de los sistemas, reparamos y damos mantenimiento a su equipo. Estas fotos son de trabajos reales.",
     "servicios": [
       {
         "nombre": "Memoria RAM",
-        "detalle": "Más memoria para que no se trabe."
+        "detalle": "Más memoria para que no se trabe.",
+        "foto": "/assets/img/trabajos/ram.webp"
       },
       {
         "nombre": "Disco SSD",
-        "detalle": "Enciende y abre programas en segundos."
+        "detalle": "Enciende y abre programas en segundos.",
+        "foto": "/assets/img/trabajos/disco.webp"
       },
       {
         "nombre": "Windows y Office",
-        "detalle": "Instalación, activación y actualizaciones."
+        "detalle": "Instalación, activación y actualizaciones.",
+        "foto": "/assets/img/trabajos/windows.webp"
       },
       {
         "nombre": "Limpieza y revisión",
-        "detalle": "Polvo fuera, temperatura bajo control."
+        "detalle": "Polvo fuera, temperatura bajo control.",
+        "foto": "/assets/img/trabajos/limpieza.webp"
       }
     ],
     "modalidades": [
@@ -267,6 +272,84 @@
         "nombre": "A domicilio",
         "detalle": "Vamos a su casa o negocio.",
         "mensaje_whatsapp": "Hola, necesito servicio a domicilio para mi computadora"
+      }
+    ]
+  },
+  "trabajos": {
+    "titulo": "Trabajos *recientes.*",
+    "descripcion": "Equipos de clientes que pasaron por nuestras manos.",
+    "lista": [
+      {
+        "equipo": "HP plateada",
+        "trabajo": "Cambio de pantalla quebrada",
+        "foto": "/assets/img/trabajos/cambio-pantalla-portada.webp",
+        "video": "/assets/video/cambio-pantalla.mp4"
+      },
+      {
+        "equipo": "Dell plateada",
+        "trabajo": "Windows 11, Office y controladores",
+        "foto": "/assets/img/trabajos/dell-plateada.webp",
+        "video": ""
+      },
+      {
+        "equipo": "Dell Inspiron",
+        "trabajo": "Batería inflada y disco SSD",
+        "foto": "/assets/img/trabajos/dell-inspiron.webp",
+        "video": ""
+      },
+      {
+        "equipo": "HP todo en uno",
+        "trabajo": "Mantenimiento interno",
+        "foto": "/assets/img/trabajos/hp-todo-en-uno.webp",
+        "video": ""
+      },
+      {
+        "equipo": "HP negra",
+        "trabajo": "Cambio de disco y Windows",
+        "foto": "/assets/img/trabajos/hp-negra.webp",
+        "video": ""
+      },
+      {
+        "equipo": "Lenovo ThinkPad",
+        "trabajo": "Cambio de disco, Windows y Office",
+        "foto": "/assets/img/trabajos/lenovo.webp",
+        "video": ""
+      },
+      {
+        "equipo": "Dell Latitude",
+        "trabajo": "Diagnóstico de falla de pantalla",
+        "foto": "/assets/img/trabajos/falla-pantalla-portada.webp",
+        "video": "/assets/video/falla-pantalla.mp4"
+      },
+      {
+        "equipo": "Dell plateada",
+        "trabajo": "Windows 11 y entrega en oficina",
+        "foto": "/assets/img/trabajos/dell-oficina.webp",
+        "video": ""
+      },
+      {
+        "equipo": "Dell negra",
+        "trabajo": "Instalación de Windows 11",
+        "foto": "/assets/img/trabajos/dell-negra.webp",
+        "video": ""
+      },
+      {
+        "equipo": "Acer",
+        "trabajo": "Disco nuevo y Office",
+        "foto": "/assets/img/trabajos/acer.webp",
+        "video": ""
+      },
+      {
+        "equipo": "HP gris",
+        "trabajo": "Formateo, Windows 10 y Office",
+        "foto": "/assets/img/trabajos/hp-gris.webp",
+        "video": ""
+      },
+      {
+        "equipo": "HP blanca",
+        "trabajo": "Formateo, Windows y Office",
+        "foto": "/assets/img/trabajos/hp-blanca.webp",
+        "video": ""
       }
     ]
   },
@@ -296,6 +379,39 @@
         "descripcion": "DRC System para cualquier giro",
         "portada": "/assets/img/casos/Vendas_lo_que_vendas_v3.webp",
         "video": "/assets/video/Vendas_lo_que_vendas_v3.mp4"
+      }
+    ]
+  },
+  "testimonios": {
+    "titulo": "Lo que dicen *nuestros clientes.*",
+    "lista": []
+  },
+  "preguntas": {
+    "titulo": "Preguntas *frecuentes.*",
+    "lista": [
+      {
+        "pregunta": "¿Necesito internet para vender?",
+        "respuesta": "No. DRC System se instala en una computadora de su negocio y sigue funcionando aunque se caiga el internet. Solo el catálogo web necesita internet para que sus clientes lo vean."
+      },
+      {
+        "pregunta": "¿Lo puedo usar en varias computadoras o en el celular?",
+        "respuesta": "Sí. Una computadora funciona como principal y las otras cajas, computadoras o celulares de su negocio se conectan a ella."
+      },
+      {
+        "pregunta": "¿La factura es legal? ¿Qué es el CAI?",
+        "respuesta": "El CAI es el código que la SAR le autoriza para facturar. Usted lo solicita en la SAR y nosotros lo configuramos en el sistema con su rango de facturas."
+      },
+      {
+        "pregunta": "¿Qué pasa si se daña mi computadora?",
+        "respuesta": "El sistema guarda copias de seguridad de su información, y pueden guardarse también en su Google Drive. Si el equipo falla, lo reinstalamos y recuperamos sus datos."
+      },
+      {
+        "pregunta": "¿Cuánto tarda la instalación?",
+        "respuesta": "Depende de cuántos productos tenga. Instalamos el sistema, le ayudamos a cargar sus productos y le enseñamos a usarlo antes de empezar."
+      },
+      {
+        "pregunta": "¿Cómo funciona el soporte a distancia?",
+        "respuesta": "Con su permiso, nos conectamos a su computadora con un programa seguro como AnyDesk y resolvemos desde aquí, sin que usted tenga que llevarla a ningún lado."
       }
     ]
   },

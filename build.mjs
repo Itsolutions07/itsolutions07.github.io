@@ -1,7 +1,8 @@
 // Genera la página final en la carpeta _site a partir de contenido/sitio.json.
 // Uso:  node build.mjs
 // GitHub lo ejecuta solo cada vez que se guarda un cambio desde el panel.
-import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync, existsSync, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { render } from './src/plantilla.mjs';
 
 const OUT = '_site';
@@ -30,13 +31,28 @@ if (faltan.length) {
 }
 
 // Las rutas de imágenes subidas desde el panel empiezan con "/"; se vuelven relativas
-const rel = (v) => (typeof v === 'string' && v.startsWith('/assets/') ? v.slice(1) : v);
+// y se les agrega una huella del archivo (?v=...) para que los celulares no muestren una foto vieja.
+const huellas = new Map();
+const huella = (f) => {
+  if (!huellas.has(f)) huellas.set(f, existsSync(f) ? createHash('md5').update(readFileSync(f)).digest('hex').slice(0, 8) : '');
+  return huellas.get(f);
+};
+const rel = (v) => {
+  if (typeof v !== 'string' || !v.startsWith('/assets/')) return v;
+  const f = v.slice(1);
+  const h = huella(f);
+  return h ? `${f}?v=${h}` : f;
+};
 const limpiar = (o) => Array.isArray(o) ? o.map(limpiar)
   : o && typeof o === 'object' ? Object.fromEntries(Object.entries(o).map(([k, v]) => [k, limpiar(v)]))
   : rel(o);
 
-rmSync(OUT, { recursive: true, force: true });
+// Vaciar la carpeta de salida. Si un archivo está abierto (p. ej. un video en la vista previa local),
+// se deja y se sobrescribe después en lugar de detener todo.
 mkdirSync(OUT, { recursive: true });
+for (const f of readdirSync(OUT)) {
+  try { rmSync(`${OUT}/${f}`, { recursive: true, force: true, maxRetries: 3 }); } catch { /* se sobrescribe abajo */ }
+}
 writeFileSync(`${OUT}/index.html`, render(limpiar(datos)));
 for (const dir of ['css', 'js', 'assets']) cpSync(dir, `${OUT}/${dir}`, { recursive: true });
 writeFileSync(`${OUT}/.nojekyll`, '');

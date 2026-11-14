@@ -16,7 +16,6 @@ export function render(d) {
   const wa = (msg) => `https://wa.me/${encodeURIComponent(d.contacto.whatsapp)}${msg ? '?text=' + encodeURIComponent(msg) : ''}`;
   const g0 = d.giros[0] || {};
   const n = d.productos.length;
-  const partes = ['ram', 'ssd', 'os', 'clean'];
 
   const phone = (src, alt, scroll = true, lazy = true) =>
     `<div class="phone"><div class="phone__screen"><img ${lazy ? 'loading="lazy" ' : ''}${scroll ? 'class="scrolly" ' : ''}src="${esc(src)}" alt="${esc(alt)}" width="480" height="1440"></div></div>`;
@@ -43,6 +42,10 @@ export function render(d) {
   };
 
   const cinta = d.cinta.map((c) => `<span>${esc(c)}</span><i></i>`).join('');
+  const trabajos = d.trabajos?.lista || [];
+  const testimonios = (d.testimonios?.lista || []).filter((t) => t.texto && t.nombre);
+  const preguntas = (d.preguntas?.lista || []).filter((q) => q.pregunta && q.respuesta);
+  const fotosFix = d.mantenimiento.servicios.map((s, i) => ({ src: s.foto, k: i, alt: s.nombre })).filter((f) => f.src);
 
   return `<!doctype html>
 <html lang="es">
@@ -73,6 +76,11 @@ export function render(d) {
     address: { '@type': 'PostalAddress', addressCountry: 'HN' },
     sameAs: [d.contacto.instagram],
   }).replace(/</g, '\\u003c')}</script>
+  ${preguntas.length ? `<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: preguntas.map((q) => ({ '@type': 'Question', name: q.pregunta, acceptedAnswer: { '@type': 'Answer', text: q.respuesta } })),
+  }).replace(/</g, '\\u003c')}</script>` : ''}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
@@ -90,6 +98,7 @@ export function render(d) {
     <a href="#pruebe">Su negocio</a>
     <a href="#mantenimiento">Mantenimiento</a>
     <a href="#casos">Clientes</a>
+    ${preguntas.length ? '<a href="#preguntas">Preguntas</a>' : ''}
   </nav>
   <div class="nav__right">
     <a class="btn btn--small" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()}>${ICON_WA}<span>Escríbanos</span></a>
@@ -209,45 +218,37 @@ ${d.productos.map((p, i) => `
       <h2 class="h2">${rich(d.mantenimiento.titulo)}</h2>
       <p class="lede">${rich(d.mantenimiento.descripcion)}</p>
       <ol class="fix__list" id="fixList">
-        ${d.mantenimiento.servicios.map((s, i) => `<li data-p="${partes[i % 4]}"><b>${esc(s.nombre)}</b><span>${esc(s.detalle)}</span></li>`).join('\n        ')}
+        ${d.mantenimiento.servicios.map((s, i) => `<li data-p="${i}"><b>${esc(s.nombre)}</b><span>${esc(s.detalle)}</span></li>`).join('\n        ')}
       </ol>
       <div class="fix__modes">
         ${d.mantenimiento.modalidades.map((m) => `<a href="${esc(wa(m.mensaje_whatsapp))}" ${ext()}><b>${esc(m.nombre)}</b><span>${esc(m.detalle)}</span></a>`).join('\n        ')}
       </div>
     </div>
-    <div class="fix__art" aria-hidden="true">
-      <svg class="xpl" id="xpl" viewBox="0 0 600 560">
-        <defs>
-          <linearGradient id="gMetal" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2A3563"/><stop offset="1" stop-color="#141B3D"/></linearGradient>
-          <linearGradient id="gScreen" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2F5BFF"/><stop offset="1" stop-color="#0B2A8F"/></linearGradient>
-          <linearGradient id="gPcb" x1="0" x2="1"><stop offset="0" stop-color="#0F6B4F"/><stop offset="1" stop-color="#0B4D3A"/></linearGradient>
-        </defs>
-        <g class="xpl__part" data-k="os" style="--dy:-70px">
-          <rect x="120" y="40" width="360" height="225" rx="14" fill="url(#gMetal)" stroke="#3A4680"/>
-          <rect x="134" y="54" width="332" height="197" rx="6" fill="url(#gScreen)"/>
-          <g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".95"><circle cx="300" cy="148" r="34"/><path d="m284 149 11 11 21-23"/></g>
-          <rect x="200" y="206" width="200" height="6" rx="3" fill="#fff" opacity=".35"/>
-          <rect class="xpl__fill" x="200" y="206" width="140" height="6" rx="3" fill="#fff"/>
-        </g>
-        <g class="xpl__part" data-k="ram" style="--dy:-40px">
-          <rect x="150" y="300" width="300" height="46" rx="4" fill="url(#gPcb)" stroke="#1E8F6A"/>
-          <g fill="#0A0F24"><rect x="166" y="310" width="40" height="26" rx="2"/><rect x="216" y="310" width="40" height="26" rx="2"/><rect x="266" y="310" width="40" height="26" rx="2"/><rect x="316" y="310" width="40" height="26" rx="2"/><rect x="366" y="310" width="40" height="26" rx="2"/></g>
-          <g fill="#E2B85C"><rect x="160" y="342" width="280" height="4"/></g>
-        </g>
-        <g class="xpl__part" data-k="ssd" style="--dy:-10px">
-          <rect x="200" y="372" width="200" height="40" rx="4" fill="#0A0F24" stroke="#3A4680"/>
-          <rect x="214" y="382" width="90" height="20" rx="2" fill="#2F5BFF"/>
-          <text x="318" y="397" fill="#A7B0CC" font-size="12" font-family="Schibsted Grotesk, sans-serif" font-weight="600">SSD 1TB</text>
-        </g>
-        <g class="xpl__part" data-k="clean" style="--dy:20px">
-          <path d="M70 470 L530 470 L560 500 Q560 512 548 512 L52 512 Q40 512 40 500 Z" fill="url(#gMetal)" stroke="#3A4680"/>
-          <rect x="250" y="470" width="100" height="8" rx="4" fill="#0A0F24"/>
-          <g class="xpl__dust" fill="#A7B0CC"><circle cx="120" cy="450" r="3"/><circle cx="180" cy="440" r="2"/><circle cx="430" cy="446" r="3"/><circle cx="480" cy="436" r="2"/><circle cx="300" cy="430" r="2"/></g>
-        </g>
-      </svg>
+    <div class="fix__art">
+      <div class="fix__photos">
+        ${fotosFix.map((f, i) => `<img decoding="async" class="${i === 0 ? 'is-on' : ''}" data-k="${f.k}" src="${esc(f.src)}" alt="${esc(f.alt)}: trabajo real de Rodriguez IT" width="1200" height="900">`).join('\n        ')}
+      </div>
     </div>
   </div>
 </section>
+
+${trabajos.length ? `<section class="jobs" id="trabajos">
+  <div class="jobs__head">
+    <h2 class="h2">${rich(d.trabajos.titulo)}</h2>
+    <p class="lede">${rich(d.trabajos.descripcion)}</p>
+  </div>
+  <div class="jobs__row">
+${trabajos.map((t) => `    <figure class="job${t.video ? ' job--video' : ''}">
+      ${t.video
+        ? `<button class="job__media" data-video="${esc(t.video)}" data-wide aria-label="Ver video: ${esc(t.trabajo)}">
+        <video muted loop playsinline preload="none" poster="${esc(t.foto)}" data-src="${esc(t.video)}"></video>
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-play"/></svg></span>
+      </button>`
+        : `<div class="job__media"><img loading="lazy" src="${esc(t.foto)}" alt="${esc(t.equipo)}: ${esc(t.trabajo)}" width="1200" height="900"></div>`}
+      <figcaption><b>${esc(t.equipo)}</b><span>${esc(t.trabajo)}</span></figcaption>
+    </figure>`).join('\n')}
+  </div>
+</section>` : ''}
 
 <section class="cases" id="casos">
   <h2 class="h2">${rich(d.clientes.titulo)}</h2>
@@ -262,6 +263,26 @@ ${d.clientes.lista.map((c) => `    <figure class="case">
   </div>
 </section>
 
+${testimonios.length ? `<section class="quotes" id="testimonios">
+  <h2 class="h2">${rich(d.testimonios.titulo)}</h2>
+  <div class="quotes__row">
+${testimonios.map((t) => `    <figure class="quote">
+      <blockquote>${esc(t.texto)}</blockquote>
+      <figcaption><b>${esc(t.nombre)}</b>${t.negocio ? `<span>${esc(t.negocio)}</span>` : ''}</figcaption>
+    </figure>`).join('\n')}
+  </div>
+</section>` : ''}
+
+${preguntas.length ? `<section class="faq" id="preguntas">
+  <h2 class="h2">${rich(d.preguntas.titulo)}</h2>
+  <div class="faq__list">
+${preguntas.map((q) => `    <details class="faq__item">
+      <summary>${esc(q.pregunta)}<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 5v14M5 12h14"/></svg></summary>
+      <p>${esc(q.respuesta)}</p>
+    </details>`).join('\n')}
+  </div>
+</section>` : ''}
+
 <section class="close" id="contacto">
   <h2 class="close__title">${rich(d.cierre.titulo)}</h2>
   <p class="lede">${rich(d.cierre.descripcion)}</p>
@@ -269,6 +290,8 @@ ${d.clientes.lista.map((c) => `    <figure class="case">
 </section>
 
 </main>
+
+${d.contacto.boton_flotante !== false ? `<a class="wa-float" id="waFloat" href="${esc(wa(d.contacto.mensaje_general))}" ${ext()} aria-label="Escríbanos por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></a>` : ''}
 
 <footer class="foot">
   <div class="foot__row">
@@ -281,6 +304,7 @@ ${d.clientes.lista.map((c) => `    <figure class="case">
       <li><a href="${esc(d.contacto.instagram)}" ${ext()}>Instagram</a></li>
       <li><a href="#productos">Productos</a></li>
       <li><a href="#mantenimiento">Mantenimiento</a></li>
+      ${preguntas.length ? '<li><a href="#preguntas">Preguntas</a></li>' : ''}
     </ul>
   </div>
   <p class="foot__word" aria-hidden="true">RODRIGUEZ&nbsp;IT</p>

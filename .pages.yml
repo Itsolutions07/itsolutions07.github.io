@@ -37,6 +37,7 @@ content:
           - { name: whatsapp_visible, label: Número como se muestra, type: string, description: "Ejemplo: +504 3318-0857" }
           - { name: instagram, label: Enlace de Instagram, type: string }
           - { name: mensaje_general, label: Mensaje del botón "Escríbanos", type: string }
+          - { name: boton_flotante, label: Mostrar botón verde de WhatsApp flotante, type: boolean }
 
       # ---------- Portada ----------
       - name: portada
@@ -137,6 +138,7 @@ content:
             fields:
               - { name: nombre, label: Servicio, type: string }
               - { name: detalle, label: Detalle, type: string }
+              - { name: foto, label: Foto real del servicio, type: image, options: { path: subidas }, description: "Se muestra al lado cuando la persona llega a este servicio." }
           - name: modalidades
             label: Modalidades (botones)
             type: object
@@ -145,6 +147,29 @@ content:
               - { name: nombre, label: Nombre, type: string }
               - { name: detalle, label: Detalle, type: string }
               - { name: mensaje_whatsapp, label: Mensaje de WhatsApp, type: string }
+
+      # ---------- Trabajos recientes ----------
+      - name: trabajos
+        label: Trabajos recientes (fotos de reparaciones)
+        type: object
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - { name: descripcion, label: Descripción, type: text }
+          - name: lista
+            label: Trabajos
+            type: object
+            list: true
+            description: "El primero se muestra más grande. Puede agregar, quitar o mover trabajos."
+            fields:
+              - { name: equipo, label: Equipo, type: string, required: true, description: "Ej.: HP negra" }
+              - { name: trabajo, label: Qué se hizo, type: string, description: "Ej.: Cambio de disco y Windows" }
+              - { name: foto, label: Foto (o portada del video), type: image, required: true, options: { path: subidas } }
+              - name: video
+                label: Video (opcional, MP4 horizontal, máximo unos 10 MB)
+                type: file
+                options:
+                  extensions: [mp4]
+                  path: video
 
       # ---------- Clientes ----------
       - name: clientes
@@ -166,6 +191,36 @@ content:
                 options:
                   extensions: [mp4]
                   path: video
+
+      # ---------- Testimonios ----------
+      - name: testimonios
+        label: Testimonios (lo que dicen los clientes)
+        type: object
+        description: "La sección solo aparece cuando hay al menos un testimonio."
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - name: lista
+            label: Testimonios
+            type: object
+            list: true
+            fields:
+              - { name: texto, label: Lo que dijo el cliente, type: text, required: true }
+              - { name: nombre, label: Nombre de la persona, type: string, required: true }
+              - { name: negocio, label: Negocio, type: string }
+
+      # ---------- Preguntas frecuentes ----------
+      - name: preguntas
+        label: Preguntas frecuentes
+        type: object
+        fields:
+          - { name: titulo, label: Título, type: string }
+          - name: lista
+            label: Preguntas
+            type: object
+            list: true
+            fields:
+              - { name: pregunta, label: Pregunta, type: string, required: true }
+              - { name: respuesta, label: Respuesta, type: text, required: true }
 
       # ---------- Cierre ----------
       - name: cierre
