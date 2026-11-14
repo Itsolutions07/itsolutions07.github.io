@@ -39,6 +39,20 @@
   const phoneScr = $('#heroPhone .phone__screen');
   const tagText = $('#heroTagText');
   let gi = 0;
+  // Reservar el ancho de la palabra más larga: así el titular no se mueve ni cambia de líneas
+  const fijarAncho = () => {
+    if (!rot || !GIROS.length) return;
+    const m = document.createElement('span');
+    m.className = 'rot__word'; m.style.cssText = 'position:absolute;visibility:hidden;left:-9999px';
+    rot.appendChild(m);
+    let max = 0;
+    GIROS.forEach((g) => { m.textContent = g.w; max = Math.max(max, m.getBoundingClientRect().width); });
+    m.remove();
+    rot.style.minWidth = Math.ceil(max) + 'px';
+  };
+  fijarAncho();
+  addEventListener('resize', fijarAncho);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fijarAncho);
 
   function swapImg(container, src, alt, extraClass = '') {
     const old = container.querySelector('img.is-on');
@@ -275,13 +289,23 @@
     else new IntersectionObserver((ents, o) => ents.forEach((e) => { if (e.isIntersecting) { marca.classList.add('is-in'); o.disconnect(); } }), { threshold: 0.25 }).observe(marca);
   }
 
-  /* ---------- Productos en celular: cada bloque aparece al llegar ---------- */
+  /* ---------- Productos en celular: se deslizan hacia los lados ---------- */
   if (innerWidth <= 900) {
-    const sio = new IntersectionObserver((ents) => ents.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add('is-active'); sio.unobserve(e.target); }
-    }), { threshold: 0.15 });
-    scenes.forEach((s) => { s.classList.remove('is-leaving'); sio.observe(s); });
+    const row = $('#seqRow');
+    scenes.forEach((s) => { s.classList.remove('is-leaving'); s.classList.add('is-active'); });
+    if (row) {
+      row.classList.add('hs-row');
+      const cnt = $('#seqCount');
+      row.addEventListener('scroll', () => {
+        const i = Math.round(row.scrollLeft / row.clientWidth);
+        if (cnt) cnt.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(scenes.length).padStart(2, '0');
+      }, { passive: true });
+    }
   }
+
+  /* ---------- Cierre: la línea de luz se dibuja al llegar ---------- */
+  const ribbon = $('#ribbon');
+  if (ribbon) new IntersectionObserver((ents, o) => ents.forEach((e) => { if (e.isIntersecting) { ribbon.classList.add('is-drawn'); o.disconnect(); } }), { threshold: 0.3 }).observe(ribbon);
 
   /* ---------- Botón Atrás del teléfono: regresa a la sección anterior ---------- */
   (() => {
@@ -321,7 +345,7 @@
   $$('.hs-row').forEach((row) => {
     const ctrl = document.querySelector(`.hs__ctrl[data-for="${row.id}"]`);
     [...row.children].forEach((c, k) => c.style.setProperty('--k', Math.min(k, 6)));
-    const paso = () => (row.firstElementChild ? row.firstElementChild.getBoundingClientRect().width + 20 : 300);
+    const paso = () => (row.id === 'seqRow' ? row.clientWidth : (row.firstElementChild ? row.firstElementChild.getBoundingClientRect().width + 20 : 300));
     const estado = () => {
       const fin = row.scrollLeft + row.clientWidth >= row.scrollWidth - 8;
       row.classList.toggle('at-end', fin);

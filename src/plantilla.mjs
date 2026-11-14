@@ -152,7 +152,8 @@ export function render(d) {
 </div>
 
 <section class="seq" id="productos" aria-label="Productos" style="height:${Math.max(2, n) * 106 + 4}vh">
-  <div class="seq__sticky">
+  <div class="hs__ctrl hs__ctrl--seq" data-for="seqRow"><span class="hs__hint">Deslice para ver más <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></svg></span><span class="hs__count" id="seqCount">01 / ${pad(n)}</span><button class="hs__btn" data-dir="-1" aria-label="Producto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 6-6 6 6 6"/></svg></button><button class="hs__btn" data-dir="1" aria-label="Siguiente producto"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></svg></button></div>
+  <div class="seq__sticky" id="seqRow">
     <div class="seq__bg" id="seqBg" aria-hidden="true"></div>
     <div class="seq__count" aria-hidden="true"><span class="seq__num" id="seqNum">01</span><span class="seq__of">/ ${pad(n)}</span></div>
     <div class="seq__bar" aria-hidden="true"><span id="seqBar"></span></div>
@@ -241,7 +242,7 @@ ${d.productos.map((p, i) => `
   </div>
 </section>
 
-${trabajos.length ? `<section class="jobs" id="trabajos">
+${trabajos.length ? `<section class="jobs bgword" id="trabajos" data-bgword="REPARACIONES">
   <div class="jobs__head">
     <h2 class="h2">${rich(d.trabajos.titulo)}</h2>
     <p class="lede">${rich(d.trabajos.descripcion)}</p>
@@ -274,7 +275,7 @@ ${d.clientes.lista.map((c) => `    <figure class="case">
   </div>
 </section>
 
-${entregados.length ? `<section class="live" id="entregados">
+${entregados.length ? `<section class="live bgword" id="entregados" data-bgword="EN ACCIÓN">
   <div class="live__head">
     <h2 class="h2">${rich(d.entregados.titulo)}</h2>
     <p class="lede">${rich(d.entregados.descripcion)}</p>
@@ -291,8 +292,12 @@ ${entregados.map((e) => `    <a class="link-card" href="${esc(e.enlace)}" ${ext(
   </div>
 </section>` : ''}
 
-${dt && dt.foto_principal ? `<section class="team" id="nosotros">
+${dt && dt.foto_principal ? `<section class="team bgword" id="nosotros" data-bgword="INGENIERÍA">
   <div class="team__media">
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><defs><path id="sealPath" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#sealPath" textLength="500">INGENIERÍA EN SISTEMAS · RODRIGUEZ IT SOLUTIONS ·</textPath></text></svg>
+      <img src="assets/img/logo-rit.webp" alt="" width="80" height="80">
+    </div>
     <figure class="team__main">
       <img loading="lazy" src="${esc(dt.foto_principal)}" alt="${esc(dt.texto_foto_principal || 'Lugar de trabajo de Rodriguez IT Solutions')}" width="1280" height="960">
       ${dt.texto_foto_principal ? `<figcaption>${esc(dt.texto_foto_principal)}</figcaption>` : ''}
@@ -321,7 +326,7 @@ ${testimonios.map((t) => `    <figure class="quote">
   </div>
 </section>` : ''}
 
-${preguntas.length ? `<section class="faq" id="preguntas">
+${preguntas.length ? `<section class="faq bgword" id="preguntas" data-bgword="PREGUNTAS">
   <h2 class="h2">${rich(d.preguntas.titulo)}</h2>
   <div class="faq__list">
 ${preguntas.map((q) => `    <details class="faq__item">
@@ -332,6 +337,15 @@ ${preguntas.map((q) => `    <details class="faq__item">
 </section>` : ''}
 
 <section class="close" id="contacto">
+  <svg class="ribbon" id="ribbon" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M-40 420 C 220 120, 420 560, 640 300 S 980 40, 1140 260 S 1380 520, 1500 180"/></svg>
+  <div class="floaters" aria-hidden="true">
+    <span style="--x:8%;--y:22%;--d:0s;--s:1"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></svg></span>
+    <span style="--x:86%;--y:18%;--d:-2s;--s:1.2"><svg viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5"/></svg></span>
+    <span style="--x:16%;--y:74%;--d:-4s;--s:.9"><svg viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M2 9a14 14 0 0 1 20 0"/><circle cx="12" cy="19.5" r="1"/></svg></span>
+    <span style="--x:80%;--y:72%;--d:-1s;--s:1.1"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>
+    <span style="--x:50%;--y:10%;--d:-3s;--s:.8"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+    <span style="--x:93%;--y:46%;--d:-5s;--s:.85"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span>
+  </div>
   <h2 class="close__title">${rich(d.cierre.titulo)}</h2>
   <p class="lede">${rich(d.cierre.descripcion)}</p>
   <a class="btn btn--xl" href="${esc(wa(d.cierre.mensaje_whatsapp))}" ${ext()}>${ICON_WA} ${esc(d.contacto.whatsapp_visible)}</a>
